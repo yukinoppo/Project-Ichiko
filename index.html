@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Juken</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="auth-page">
+
+        <h1>PROJECT JUKEN</h1>
+        <p>Study. Play. Collect.</p>
+
+        <section class="auth-box">
+
+            <!-- Buttons for switching between Login/Register -->
+            <div class="auth-tabs">
+                <button id="login-tab">Login</button>
+                <button id="register-tab">Register</button>
+            </div>
+
+            <!-- LOGIN -->
+            <form id="login-form">
+
+                <h2>Login</h2>
+
+                <label for="login-email">Email</label>
+                <input
+                    type="email"
+                    id="login-email"
+                    required
+                >
+
+                <label for="login-password">Password</label>
+                <input
+                    type="password"
+                    id="login-password"
+                    required
+                >
+
+                <button type="submit">Login</button>
+
+            </form>
+
+
+            <!-- REGISTER -->
+            <form id="register-form">
+
+                <h2>Create Account</h2>
+
+                <label for="register-username">Username</label>
+                <input
+                    type="text"
+                    id="register-username"
+                    maxlength="15"
+                    required
+                >
+
+                <label for="register-display-name">Display Name</label>
+                <input
+                    type="text"
+                    id="register-display-name"
+                    maxlength="15"
+                    required
+                >
+
+                <label for="register-email">Email</label>
+                <input
+                    type="email"
+                    id="register-email"
+                    required
+                >
+
+                <label for="register-password">Password</label>
+                <input
+                    type="password"
+                    id="register-password"
+                    required
+                >
+
+                <label for="confirm-password">Confirm Password</label>
+                <input
+                    type="password"
+                    id="confirm-password"
+                    required
+                >
+
+                <button type="submit">Create Account</button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
