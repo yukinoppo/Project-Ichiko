@@ -1,0 +1,209 @@
+/* ---------- BASIC PAGE SETUP ---------- */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Arial, "Noto Sans JP", sans-serif;
+
+    background: #10131a;
+    color: #ffffff;
+}
+
+
+/* ---------- MAIN LOGIN AREA ---------- */
+
+.auth-page {
+    width: 100%;
+    max-width: 450px;
+
+    padding: 30px 20px;
+
+    text-align: center;
+}
+
+
+/* Game title */
+
+.auth-page h1 {
+    margin-bottom: 8px;
+
+    font-size: 36px;
+    letter-spacing: 2px;
+}
+
+
+/* Subtitle */
+
+.auth-page > p {
+    margin-top: 0;
+    margin-bottom: 30px;
+
+    color: #a8adbd;
+}
+
+
+/* ---------- LOGIN / REGISTER CARD ---------- */
+
+.auth-box {
+    width: 100%;
+
+    padding: 28px;
+
+    background: #1a1f2b;
+
+    border: 1px solid #303748;
+    border-radius: 16px;
+
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+}
+
+
+/* ---------- LOGIN / REGISTER TABS ---------- */
+
+.auth-tabs {
+    display: flex;
+
+    margin-bottom: 25px;
+
+    background: #11151d;
+    border-radius: 10px;
+
+    padding: 4px;
+}
+
+
+.auth-tabs button {
+    flex: 1;
+
+    padding: 10px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: transparent;
+    color: #9298aa;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+.auth-tabs button:hover {
+    color: white;
+    background: #242b3a;
+}
+
+
+/* ---------- FORMS ---------- */
+
+form {
+    display: flex;
+    flex-direction: column;
+
+    text-align: left;
+}
+
+
+form h2 {
+    margin-top: 0;
+    margin-bottom: 22px;
+
+    text-align: center;
+}
+
+
+/* Input labels */
+
+label {
+    margin-bottom: 7px;
+
+    color: #c5c9d4;
+
+    font-size: 14px;
+}
+
+
+/* Input boxes */
+
+input {
+    width: 100%;
+
+    margin-bottom: 18px;
+    padding: 12px 14px;
+
+    border: 1px solid #353d50;
+    border-radius: 8px;
+
+    background: #11151d;
+    color: white;
+
+    font-size: 16px;
+
+    outline: none;
+}
+
+
+/* Input selected */
+
+input:focus {
+    border-color: #6c7cff;
+}
+
+
+/* ---------- MAIN FORM BUTTON ---------- */
+
+form button[type="submit"] {
+    margin-top: 5px;
+
+    padding: 13px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #6374f3;
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+form button[type="submit"]:hover {
+    background: #7484ff;
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 500px) {
+
+    .auth-page {
+        padding: 20px 15px;
+    }
+
+    .auth-box {
+        padding: 22px 18px;
+    }
+
+    .auth-page h1 {
+        font-size: 30px;
+    }
+
+}
+
+.hidden {
+    display: none;
+}
