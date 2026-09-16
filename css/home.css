@@ -1,0 +1,470 @@
+/* =========================================================
+   PROJECT ICHIKO - HOME
+   Main homepage styling
+   ========================================================= */
+
+
+/* ---------- GLOBAL ---------- */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    font-family: Arial, "Noto Sans JP", sans-serif;
+
+    background: #10131a;
+    color: #ffffff;
+}
+
+
+/* ---------- TOP BAR ---------- */
+
+.top-bar {
+    width: 100%;
+    height: 72px;
+    padding: 0 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: #1a1f2b;
+    border-bottom: 1px solid #303748;
+}
+
+
+/* ---------- GAME TITLE ---------- */
+
+.game-title h1 {
+    margin: 0;
+
+    font-size: 22px;
+    letter-spacing: 2px;
+}
+
+
+/* ---------- USER AREA ---------- */
+
+.user-area {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.streak,
+.currency {
+    padding: 8px 12px;
+
+    background: #11151d;
+    border: 1px solid #303748;
+    border-radius: 8px;
+
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
+/* ---------- PROFILE BUTTON ---------- */
+
+.profile-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 6px 10px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: transparent;
+    color: white;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.profile-button:hover {
+    background: #242b3a;
+}
+
+#profile-picture {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+    border: 2px solid #6374f3;
+
+    object-fit: cover;
+}
+
+.dropdown-arrow {
+    font-size: 10px;
+    color: #9298aa;
+}
+
+
+/* ---------- PROFILE DROPDOWN ---------- */
+
+.profile-dropdown {
+    position: absolute;
+
+    top: 58px;
+    right: 0;
+
+    width: 170px;
+    padding: 8px;
+
+    background: #1a1f2b;
+    border: 1px solid #303748;
+    border-radius: 10px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+
+    z-index: 100;
+}
+
+.profile-dropdown a,
+.profile-dropdown button {
+    display: block;
+
+    width: 100%;
+    padding: 11px 12px;
+
+    border: none;
+    border-radius: 7px;
+
+    background: transparent;
+    color: #d5d8e0;
+
+    text-align: left;
+    text-decoration: none;
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+.profile-dropdown a:hover,
+.profile-dropdown button:hover {
+    background: #242b3a;
+    color: white;
+}
+
+
+/* ---------- UTILITIES ---------- */
+
+.hidden {
+    display: none;
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 650px) {
+
+    .top-bar {
+        height: 64px;
+        padding: 0 14px;
+    }
+
+    .game-title h1 {
+        font-size: 17px;
+        letter-spacing: 1px;
+    }
+
+    .user-area {
+        gap: 7px;
+    }
+
+    .streak,
+    .currency {
+        padding: 6px 7px;
+        font-size: 13px;
+    }
+
+    #display-name,
+    .dropdown-arrow {
+        display: none;
+    }
+
+    #profile-picture {
+        width: 38px;
+        height: 38px;
+    }
+
+    .profile-button {
+        padding: 3px;
+    }
+}
+
+/* ---------- HOME CONTENT ---------- */
+
+.home-content {
+    width: 100%;
+    max-width: 1000px;
+
+    margin: 0 auto;
+    padding: 18px 16px 100px;
+}
+
+
+/* ---------- WORLD AREA ---------- */
+
+.world-area {
+    position: relative;
+
+    width: 100%;
+    height: 220px;
+
+    margin-bottom: 16px;
+
+    overflow: hidden;
+
+    background: #171c27;
+    border: 1px solid #303748;
+    border-radius: 16px;
+}
+
+.world-placeholder {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #6f7688;
+    font-size: 14px;
+}
+
+
+/* ---------- DAILY CHALLENGE ---------- */
+
+.daily-challenge {
+    padding: 22px;
+    margin-bottom: 16px;
+
+    text-align: center;
+
+    background: #1a1f2b;
+    border: 1px solid #3b4357;
+    border-radius: 16px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.section-label {
+    margin: 0 0 8px;
+
+    color: #8490ff;
+
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+
+.daily-challenge h2 {
+    margin: 0 0 12px;
+
+    font-size: 21px;
+}
+
+.daily-progress {
+    margin-bottom: 16px;
+
+    color: #b9becc;
+
+    font-size: 15px;
+}
+
+#daily-start-button {
+    width: 100%;
+    min-height: 48px;
+
+    padding: 12px 24px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #6374f3;
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+#daily-start-button:hover {
+    background: #7484ff;
+}
+
+
+/* ---------- STUDY MODES ---------- */
+
+.study-modes {
+    display: grid;
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+
+    margin-bottom: 16px;
+}
+
+.mode-card {
+    min-height: 90px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding: 18px;
+
+    border: 1px solid #303748;
+    border-radius: 14px;
+
+    background: #1a1f2b;
+    color: white;
+
+    text-align: left;
+
+    cursor: pointer;
+}
+
+.mode-card:hover {
+    background: #202635;
+    border-color: #46506a;
+}
+
+.mode-title {
+    margin-bottom: 6px;
+
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.mode-description {
+    color: #9298aa;
+
+    font-size: 13px;
+}
+
+
+/* ---------- TODAY'S PROGRESS ---------- */
+
+.today-progress {
+    padding: 18px;
+
+    background: #1a1f2b;
+    border: 1px solid #303748;
+    border-radius: 14px;
+}
+
+.progress-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 14px;
+}
+
+.progress-heading h2 {
+    margin: 0;
+
+    font-size: 17px;
+}
+
+.progress-heading > span {
+    color: #a8adbd;
+
+    font-size: 14px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+
+    overflow: hidden;
+
+    background: #11151d;
+    border-radius: 999px;
+}
+
+.progress-fill {
+    width: 0%;
+    height: 100%;
+
+    background: #6374f3;
+    border-radius: 999px;
+
+    transition: width 0.3s ease;
+}
+
+
+/* ---------- TABLET ---------- */
+
+@media (min-width: 650px) {
+
+    .home-content {
+        padding: 24px 24px 110px;
+    }
+
+    .world-area {
+        height: 300px;
+    }
+
+    .daily-challenge {
+        padding: 26px;
+    }
+
+    .study-modes {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .mode-card {
+        min-height: 110px;
+    }
+}
+
+
+/* ---------- DESKTOP ---------- */
+
+@media (min-width: 1100px) {
+
+    .home-content {
+        padding-top: 30px;
+    }
+
+    .world-area {
+        height: 340px;
+    }
+}
+
+.logout-screen {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #10131a;
+    color: white;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    z-index: 1000;
+}
+
+.logout-screen.hidden {
+    display: none;
+}

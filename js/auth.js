@@ -14,6 +14,10 @@ const supabaseClient = supabase.createClient(
     SUPABASE_KEY
 );
 
+//Query Parameters
+const params = new URLSearchParams(window.location.search);
+const reason = params.get("reason");
+
 //Get buttons
 const loginTab = document.getElementById("login-tab");
 const registerTab = document.getElementById("register-tab");
@@ -96,3 +100,8 @@ loginForm.addEventListener("submit", async function(event){
     window.location.href = "home.html";
 
 });
+
+//Failed Session Check Redirect
+if (reason === "login-required") {
+    alert("Please log in");
+}

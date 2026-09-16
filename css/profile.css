@@ -1,0 +1,708 @@
+/* =========================================================
+   PROJECT ICHIKO - PROFILE PAGE
+   ========================================================= */
+
+
+/* ---------- GLOBAL ---------- */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    font-family: Arial, "Noto Sans JP", sans-serif;
+
+    background: #10131a;
+    color: #ffffff;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/* ---------- TOP BAR ---------- */
+
+.profile-top-bar {
+    width: 100%;
+    min-height: 64px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 16px;
+
+    background: #1a1f2b;
+    border-bottom: 1px solid #303748;
+}
+
+.profile-top-bar h1 {
+    margin: 0 auto;
+
+    font-size: 16px;
+    letter-spacing: 1.5px;
+}
+
+.back-button {
+    min-height: 44px;
+
+    display: flex;
+    align-items: center;
+
+    color: #b9becc;
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.back-button:hover {
+    color: white;
+}
+
+
+/* ---------- PAGE ---------- */
+
+.profile-page {
+    width: 100%;
+    max-width: 900px;
+
+    margin: 0 auto;
+    padding: 20px 16px 80px;
+}
+
+
+/* =========================================================
+   PROFILE CARD
+   ========================================================= */
+
+.profile-card {
+    margin-bottom: 18px;
+
+    overflow: hidden;
+
+    background: #1a1f2b;
+
+    border: 1px solid #303748;
+    border-radius: 18px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+
+/* ---------- BANNER ---------- */
+
+.profile-banner {
+    position: relative;
+
+    width: 100%;
+    height: 170px;
+
+    overflow: hidden;
+
+    background: #242b3a;
+}
+
+#profile-banner-image {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+.change-banner-button {
+    position: absolute;
+
+    right: 12px;
+    top: 12px;
+
+    min-height: 40px;
+
+    padding: 8px 13px;
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 9px;
+
+    background: rgba(10, 13, 20, 0.72);
+    color: white;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(6px);
+}
+
+.change-banner-button:hover {
+    background: rgba(25, 30, 43, 0.9);
+}
+
+
+/* ---------- PLAYER IDENTITY ---------- */
+
+.profile-identity {
+    position: relative;
+
+    display: flex;
+    align-items: flex-end;
+
+    gap: 18px;
+
+    padding: 0 18px 22px;
+}
+
+
+/* ---------- AVATAR ---------- */
+
+.avatar-button {
+    position: relative;
+
+    width: 100px;
+    height: 100px;
+
+    flex-shrink: 0;
+
+    margin-top: -45px;
+
+    padding: 0;
+
+    border: 4px solid #1a1f2b;
+    border-radius: 50%;
+
+    background: #252c3b;
+
+    cursor: pointer;
+}
+
+#profile-avatar {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+}
+
+.avatar-button:hover #profile-avatar {
+    filter: brightness(0.8);
+}
+
+.avatar-edit-icon {
+    position: absolute;
+
+    right: -2px;
+    bottom: 4px;
+
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 3px solid #1a1f2b;
+    border-radius: 50%;
+
+    background: #6374f3;
+    color: white;
+
+    font-size: 13px;
+}
+
+
+/* ---------- PLAYER INFO ---------- */
+
+.player-info {
+    min-width: 0;
+
+    padding-top: 14px;
+}
+
+.display-name-row {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+#profile-display-name {
+    margin: 0;
+
+    overflow: hidden;
+
+    font-size: 23px;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.username {
+    margin: 5px 0 12px;
+
+    color: #9298aa;
+
+    font-size: 13px;
+}
+
+.edit-profile-button {
+    min-height: 40px;
+
+    padding: 8px 15px;
+
+    border: 1px solid #3c455c;
+    border-radius: 8px;
+
+    background: #252b39;
+    color: #e5e7ed;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.edit-profile-button:hover {
+    background: #30384a;
+}
+
+
+/* =========================================================
+   PROFILE SECTIONS
+   ========================================================= */
+
+.profile-section {
+    margin-bottom: 16px;
+    padding: 18px;
+
+    background: #1a1f2b;
+
+    border: 1px solid #303748;
+    border-radius: 14px;
+}
+
+.profile-section > h2 {
+    margin: 0 0 14px;
+
+    color: #969fb4;
+
+    font-size: 12px;
+    letter-spacing: 1.5px;
+}
+
+
+/* ---------- BIO ---------- */
+
+#profile-bio {
+    margin: 0;
+
+    color: #d6d9e1;
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   STATISTICS
+   ========================================================= */
+
+.statistics-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 8px;
+}
+
+.stat {
+    min-width: 0;
+
+    padding: 14px 8px;
+
+    text-align: center;
+
+    background: #131821;
+
+    border: 1px solid #292f3e;
+    border-radius: 10px;
+}
+
+.stat-value {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #ffffff;
+
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.stat-label {
+    display: block;
+
+    color: #8e95a7;
+
+    font-size: 11px;
+    line-height: 1.3;
+}
+
+
+/* =========================================================
+   COSMETIC POPUP
+   ========================================================= */
+
+.cosmetic-popup {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    background: rgba(5, 7, 12, 0.78);
+
+    backdrop-filter: blur(4px);
+}
+
+
+/*
+   Important:
+   this is more specific than .cosmetic-popup,
+   so hidden popups actually stay hidden.
+*/
+
+.cosmetic-popup.hidden {
+    display: none;
+}
+
+
+/* ---------- POPUP PANEL ---------- */
+
+.cosmetic-panel {
+    width: 100%;
+    max-height: 85vh;
+
+    overflow-y: auto;
+
+    padding: 20px 16px 28px;
+
+    background: #1a1f2b;
+
+    border: 1px solid #343c50;
+
+    border-radius: 20px 20px 0 0;
+
+    box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.4);
+}
+
+
+/* ---------- POPUP HEADER ---------- */
+
+.popup-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+}
+
+.popup-header h2 {
+    margin: 0;
+
+    font-size: 20px;
+}
+
+.close-button {
+    width: 44px;
+    height: 44px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #252b39;
+    color: #c7cbd5;
+
+    font-size: 17px;
+
+    cursor: pointer;
+}
+
+.close-button:hover {
+    background: #30384a;
+    color: white;
+}
+
+
+/* =========================================================
+   AVATAR GRID
+   ========================================================= */
+
+.cosmetic-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 12px;
+
+    margin-bottom: 22px;
+}
+
+.cosmetic-item {
+    position: relative;
+
+    aspect-ratio: 1 / 1;
+
+    padding: 3px;
+
+    overflow: hidden;
+
+    border: 2px solid transparent;
+    border-radius: 50%;
+
+    background: #252b39;
+
+    cursor: pointer;
+}
+
+.cosmetic-item img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+}
+
+
+/* Selected cosmetic */
+
+.cosmetic-item.selected {
+    border-color: #7d8cff;
+
+    box-shadow: 0 0 0 2px rgba(125, 140, 255, 0.15);
+}
+
+
+/* ---------- LOCKED COSMETICS ---------- */
+
+.cosmetic-image-wrapper {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+}
+
+.cosmetic-item.locked img,
+.banner-item.locked img {
+    filter: grayscale(1) brightness(0.4);
+}
+
+.lock-icon {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    font-size: 20px;
+
+    pointer-events: none;
+}
+
+
+/*
+   Locked cosmetics still use cursor:pointer
+   because later we WANT users to click them
+   and see how they can unlock them.
+*/
+
+
+/* =========================================================
+   BANNER GRID
+   ========================================================= */
+
+.banner-grid {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+
+    margin-bottom: 22px;
+}
+
+.banner-item {
+    position: relative;
+
+    width: 100%;
+    aspect-ratio: 16 / 5;
+
+    padding: 3px;
+
+    overflow: hidden;
+
+    border: 2px solid transparent;
+    border-radius: 10px;
+
+    background: #252b39;
+
+    cursor: pointer;
+}
+
+.banner-item img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    border-radius: 7px;
+
+    object-fit: cover;
+}
+
+.banner-item.selected {
+    border-color: #7d8cff;
+}
+
+
+/* =========================================================
+   COSMETIC DESCRIPTION
+   ========================================================= */
+
+.cosmetic-info {
+    padding: 16px;
+
+    background: #121720;
+
+    border: 1px solid #2b3242;
+    border-radius: 12px;
+}
+
+.cosmetic-info h3 {
+    margin: 0 0 7px;
+
+    font-size: 16px;
+}
+
+.cosmetic-info p {
+    margin: 0;
+
+    color: #9da4b5;
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (min-width: 650px) {
+
+    .profile-page {
+        padding: 28px 24px 100px;
+    }
+
+    .profile-banner {
+        height: 230px;
+    }
+
+    .profile-identity {
+        gap: 22px;
+
+        padding: 0 26px 26px;
+    }
+
+    .avatar-button {
+        width: 125px;
+        height: 125px;
+
+        margin-top: -58px;
+    }
+
+    #profile-display-name {
+        font-size: 27px;
+    }
+
+    .profile-section {
+        padding: 22px;
+    }
+
+    .statistics-grid {
+        gap: 14px;
+    }
+
+    .stat {
+        padding: 20px 12px;
+    }
+
+    .stat-value {
+        font-size: 25px;
+    }
+
+    .stat-label {
+        font-size: 12px;
+    }
+
+    .cosmetic-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    .banner-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    /* Popup becomes centered instead of bottom sheet */
+
+    .cosmetic-popup {
+        align-items: center;
+
+        padding: 24px;
+    }
+
+    .cosmetic-panel {
+        max-width: 720px;
+
+        padding: 24px;
+
+        border-radius: 18px;
+    }
+}
+
+
+/* =========================================================
+   DESKTOP
+   ========================================================= */
+
+@media (min-width: 1000px) {
+
+    .profile-banner {
+        height: 270px;
+    }
+
+    .profile-page {
+        padding-top: 36px;
+    }
+
+    .cosmetic-grid {
+        grid-template-columns: repeat(7, 1fr);
+    }
+}

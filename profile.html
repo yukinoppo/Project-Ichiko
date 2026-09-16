@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Profile | Project ICHIKO</title>
+
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+
+<body>
+
+    <!-- ==================== TOP BAR ==================== -->
+
+    <header class="profile-top-bar">
+
+        <a href="home.html" class="back-button">
+            ← Back
+        </a>
+
+        <h1>PLAYER PROFILE</h1>
+
+    </header>
+
+
+    <!-- ==================== PROFILE PAGE ==================== -->
+
+    <main class="profile-page">
+
+        <!-- Profile Card -->
+        <section class="profile-card">
+
+            <!-- Banner -->
+            <div class="profile-banner">
+
+                <img
+                    id="profile-banner-image"
+                    src="assets/banners/default.webp"
+                    alt="Profile Banner"
+                >
+
+                <button id="change-banner-button" class="change-banner-button">
+                    Change Banner
+                </button>
+
+            </div>
+
+
+            <!-- Player Identity -->
+            <div class="profile-identity">
+
+                <!-- Avatar -->
+                <button id="avatar-button" class="avatar-button">
+
+                    <img
+                        id="profile-avatar"
+                        src="assets/avatars/default.webp"
+                        alt="Profile Avatar"
+                    >
+
+                    <span class="avatar-edit-icon">✎</span>
+
+                </button>
+
+
+                <!-- Player Information -->
+                <div class="player-info">
+
+                    <div class="display-name-row">
+
+                        <h2 id="profile-display-name">
+                            Player
+                        </h2>
+
+                    </div>
+
+                    <p class="username">
+                        @<span id="profile-username">username</span>
+                    </p>
+
+                    <button id="edit-profile-button" class="edit-profile-button">
+                        Edit Profile
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================== BIO ==================== -->
+
+        <section class="profile-section bio-section">
+
+            <h2>BIO</h2>
+
+            <p id="profile-bio">
+                No bio yet.
+            </p>
+
+        </section>
+
+
+        <!-- ==================== STATISTICS ==================== -->
+
+        <section class="profile-section statistics-section">
+
+            <h2>STATISTICS</h2>
+
+            <div class="statistics-grid">
+
+                <div class="stat">
+                    <span id="questions-answered" class="stat-value">--</span>
+                    <span class="stat-label">Questions Answered</span>
+                </div>
+
+                <div class="stat">
+                    <span id="current-streak" class="stat-value">--</span>
+                    <span class="stat-label">Current Streak</span>
+                </div>
+
+                <div class="stat">
+                    <span id="best-survival" class="stat-value">--</span>
+                    <span class="stat-label">Best Survival</span>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==================== AVATAR SELECTOR ==================== -->
+
+    <div id="avatar-popup" class="cosmetic-popup hidden">
+
+        <div class="cosmetic-panel">
+
+            <div class="popup-header">
+
+                <h2>Select Avatar</h2>
+
+                <button id="close-avatar-popup" class="close-button">
+                    ✕
+                </button>
+
+            </div>
+
+
+            <!-- Avatar Grid -->
+            <div id="avatar-grid" class="cosmetic-grid">
+
+                <!-- Default unlocked avatar -->
+                <button class="cosmetic-item selected">
+                    <img
+                        src="assets/avatars/default.webp"
+                        alt="Default Avatar"
+                    >
+                </button>
+
+
+                <!-- Example locked avatars -->
+                <button class="cosmetic-item locked">
+                    <div class="cosmetic-image-wrapper">
+
+                        <img
+                            src="assets/avatars/avatar-02.webp"
+                            alt="Locked Avatar"
+                        >
+
+                        <span class="lock-icon">🔒</span>
+
+                    </div>
+                </button>
+
+
+                <button class="cosmetic-item locked">
+                    <div class="cosmetic-image-wrapper">
+
+                        <img
+                            src="assets/avatars/avatar-03.webp"
+                            alt="Locked Avatar"
+                        >
+
+                        <span class="lock-icon">🔒</span>
+
+                    </div>
+                </button>
+
+            </div>
+
+
+            <!-- Selected Cosmetic Information -->
+            <div class="cosmetic-info">
+
+                <h3 id="avatar-name">
+                    Default Avatar
+                </h3>
+
+                <p id="avatar-description">
+                    Available from the beginning.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==================== BANNER SELECTOR ==================== -->
+
+    <div id="banner-popup" class="cosmetic-popup hidden">
+
+        <div class="cosmetic-panel">
+
+            <div class="popup-header">
+
+                <h2>Select Banner</h2>
+
+                <button id="close-banner-popup" class="close-button">
+                    ✕
+                </button>
+
+            </div>
+
+
+            <!-- Banner Grid -->
+            <div id="banner-grid" class="banner-grid">
+
+                <button class="banner-item selected">
+
+                    <img
+                        src="assets/banners/default.webp"
+                        alt="Default Banner"
+                    >
+
+                </button>
+
+
+                <button class="banner-item locked">
+
+                    <div class="cosmetic-image-wrapper">
+
+                        <img
+                            src="assets/banners/banner-02.webp"
+                            alt="Locked Banner"
+                        >
+
+                        <span class="lock-icon">🔒</span>
+
+                    </div>
+
+                </button>
+
+
+                <button class="banner-item locked">
+
+                    <div class="cosmetic-image-wrapper">
+
+                        <img
+                            src="assets/banners/banner-03.webp"
+                            alt="Locked Banner"
+                        >
+
+                        <span class="lock-icon">🔒</span>
+
+                    </div>
+
+                </button>
+
+            </div>
+
+
+            <!-- Selected Banner Information -->
+            <div class="cosmetic-info">
+
+                <h3 id="banner-name">
+                    Default Banner
+                </h3>
+
+                <p id="banner-description">
+                    Available from the beginning.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==================== SCRIPTS ==================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="module" src="js/profile.js"></script>
+
+</body>
+
+</html>

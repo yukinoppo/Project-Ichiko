@@ -1,10 +1,132 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Ichiko</title>
+    <link rel="stylesheet" href="css/home.css">
 </head>
+
 <body>
+<header class="top-bar">
+
+    <!-- Game Title -->
+    <div class="game-title">
+        <h1>PROJECT ICHIKO</h1>
+    </div>
+
+    <!-- User Information -->
+    <div class="user-area">
+
+        <!-- Streak -->
+        <div class="streak">
+            🔥 <span id="streak-count">0</span>
+        </div>
+
+        <!-- Currency -->
+        <div class="currency">
+            💎 <span id="gem-count">0</span>
+        </div>
+
+        <!-- Profile Button -->
+        <button id="profile-button" class="profile-button">
+            <img
+                id="profile-picture"
+                src="assets/avatars/default.webp"
+                alt="Profile Picture"
+            >
+
+            <span id="display-name">Player</span>
+            <span class="dropdown-arrow">▼</span>
+        </button>
+
+        <!-- Profile Dropdown -->
+        <div id="profile-dropdown" class="profile-dropdown hidden">
+            <a href="profile.html">Profile</a>
+            <a href="settings.html">Settings</a>
+            <button id="logout-button">Logout</button>
+        </div>
+
+    </div>
+
+</header>
+
+<main class="home-content">
+
+    <!-- Pet / Character World -->
+    <section class="world-area">
+        <div class="world-placeholder">
+            <p>Your characters will appear here.</p>
+        </div>
+    </section>
+
+
+    <!-- Daily Challenge -->
+    <section class="daily-challenge">
+        <p class="section-label">DAILY CHALLENGE</p>
+
+        <h2>Today's Juken Challenge</h2>
+
+        <div class="daily-progress">
+            <span id="daily-completed">0</span>
+            <span>/</span>
+            <span id="daily-total">10</span>
+        </div>
+
+        <button id="daily-start-button">
+            Start
+        </button>
+    </section>
+
+
+    <!-- Study Modes -->
+    <section class="study-modes">
+
+        <button class="mode-card" id="practice-button">
+            <span class="mode-title">Practice</span>
+            <span class="mode-description">
+                Study at your own pace
+            </span>
+        </button>
+
+        <button class="mode-card" id="survival-button">
+            <span class="mode-title">Survival</span>
+            <span class="mode-description">
+                How far can you go?
+            </span>
+        </button>
+
+    </section>
+
+
+    <!-- Today's Progress -->
+    <section class="today-progress">
+
+        <div class="progress-heading">
+            <h2>Today's Progress</h2>
+
+            <span>
+                <span id="today-completed">0</span>
+                /
+                <span id="today-goal">10</span>
+            </span>
+        </div>
+
+        <div class="progress-bar">
+            <div id="progress-fill" class="progress-fill"></div>
+        </div>
+
+    </section>
+
+</main>
+
+    <div id="logout-screen" class="logout-screen hidden">
+    <p>Logging out...</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/home.js"></script>
 
 </body>
 </html>
