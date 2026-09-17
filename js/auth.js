@@ -26,6 +26,24 @@ const registerTab = document.getElementById("register-tab");
 const loginForm = document.getElementById("login-form");
 const registerForm = document.getElementById("register-form");
 
+//Check if logged in already
+async function checkSession() {
+
+    const {data, error} = await supabaseClient.auth.getSession();
+
+    if (error) {
+        console.error("Session check failed:", error);
+        return;
+    }
+
+    if (data.session !== null) {
+        window.location.href = "home.html";
+        return;
+    }
+}
+
+checkSession();
+
 //Register clicked
 registerTab.addEventListener("click", function() {
     loginForm.classList.add("hidden");
