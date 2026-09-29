@@ -468,3 +468,115 @@ body {
 .logout-screen.hidden {
     display: none;
 }
+
+/* =========================
+   DAILY CHALLENGE
+   ========================= */
+
+.daily-challenge {
+    padding: 24px;
+    border: 1px solid #2d3340;
+    border-radius: 16px;
+    background: #181c25;
+}
+
+.daily-challenge .section-label {
+    margin: 0 0 8px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #9da7b8;
+}
+
+.daily-challenge h2 {
+    margin: 0 0 12px;
+    font-size: 22px;
+    color: #ffffff;
+}
+
+
+/* Progress text */
+
+.daily-progress-text {
+    margin: 0 0 20px;
+    font-size: 14px;
+    color: #aeb6c4;
+}
+
+#daily-completed {
+    font-weight: 700;
+    color: #ffffff;
+}
+
+
+/* Main Daily button */
+
+.daily-button {
+    width: 100%;
+    min-height: 48px;
+
+    border: none;
+    border-radius: 10px;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        opacity 0.15s ease,
+        background 0.15s ease;
+}
+
+
+/* Normal START / CONTINUE state */
+
+.daily-button:not(:disabled) {
+    background: #7257e8;
+    color: white;
+}
+
+
+/* Desktop hover only */
+
+@media (hover: hover) and (pointer: fine) {
+
+    .daily-button:not(:disabled):hover {
+        transform: translateY(-1px);
+        background: #8068eb;
+    }
+}
+
+
+/* Completed state */
+
+.daily-button:disabled {
+    background: #343945;
+    color: #858c99;
+
+    cursor: not-allowed;
+    opacity: 0.75;
+}
+
+
+/* =========================
+   TABLET / DESKTOP
+   ========================= */
+
+@media (min-width: 650px) {
+
+    .daily-challenge {
+        padding: 28px;
+    }
+
+    .daily-challenge h2 {
+        font-size: 24px;
+    }
+
+    .daily-button {
+        width: auto;
+        min-width: 160px;
+        padding: 0 28px;
+    }
+}

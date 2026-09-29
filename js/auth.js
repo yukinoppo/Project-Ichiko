@@ -56,7 +56,7 @@ loginTab.addEventListener("click", function() {
     loginForm.classList.remove("hidden");
 });
 
-//Registration
+//Registration Submitted
 registerForm.addEventListener("submit", async function(event) {
 
     event.preventDefault();

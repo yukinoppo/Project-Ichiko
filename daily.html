@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Daily Challenge | Project Ichikp</title>
+
+    <link rel="stylesheet" href="css/daily.css">
+    <link rel="stylesheet" href="css/tutorial.css">
+</head>
+
+<body>
+
+    <main class="daily-page">
+        <div id="daily-game">
+        <!-- Top -->
+        <header class="daily-header">
+            <a href="home.html" class="back-button">←</a>
+
+            <div class="daily-title">
+                <p>DAILY CHALLENGE</p>
+                <h1>Today's Challenge</h1>
+            </div>
+
+            <div class="question-counter">
+                <span id="current-question-number">1</span>
+                /
+                <span id="total-questions">4</span>
+            </div>
+        </header>
+
+
+        <!-- Progress -->
+        <div class="daily-progress-bar">
+            <div id="daily-progress-fill"></div>
+        </div>
+
+
+        <!-- Question -->
+        <section id="question-card" class="question-card">
+
+            <div class="question-info">
+                <span id="question-subject">Subject</span>
+                <span id="question-topic">Topic</span>
+            </div>
+
+            <h2 id="question-text">
+                Loading question...
+            </h2>
+
+
+            <!-- Answers -->
+            <div class="answer-list">
+
+                <button class="answer-button" data-answer="A">
+                    <span class="answer-letter">A</span>
+                    <span id="answer-a">Answer A</span>
+                </button>
+
+                <button class="answer-button" data-answer="B">
+                    <span class="answer-letter">B</span>
+                    <span id="answer-b">Answer B</span>
+                </button>
+
+                <button class="answer-button" data-answer="C">
+                    <span class="answer-letter">C</span>
+                    <span id="answer-c">Answer C</span>
+                </button>
+
+                <button class="answer-button" data-answer="D">
+                    <span class="answer-letter">D</span>
+                    <span id="answer-d">Answer D</span>
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- Feedback shown after answering -->
+        <section id="answer-feedback" class="answer-feedback hidden">
+
+            <p id="feedback-text"></p>
+        </section>
+
+            <button id="next-question-button">
+                Submit
+            </button>
+
+        </div>
+
+            <section id="daily-results" class="daily-results hidden">
+
+            <p class="section-label">DAILY COMPLETE</p>
+
+            <h2>Nice work!</h2>
+
+            <div class="result-score">
+                <span id="result-score">0</span>
+                <span>/ 4</span>
+            </div>
+
+            <p id="result-message">
+                You completed today's Daily Challenge.
+            </p>
+
+            <a href="home.html" class="home-button">
+                Back to Home
+            </a>
+
+</section>
+
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="module" src="js/daily.js"></script>
+
+</body>
+</html>

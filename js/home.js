@@ -1,10 +1,11 @@
+import { startTutorial } from "./tutorial.js";
+
 /**
  * Project Ichiko
  * Main homepage script
  *
  * Handles session validation and homepage functionality.
  */
-
 /* ---------- SUPABASE SETUP ---------- */
 const SUPABASE_URL = "https://lzxbsruzaqqjlqyhtvwx.supabase.co";
 const SUPABASE_KEY = "sb_publishable_40Diyrrl6ZJUP_AssHf5WA_gTYSAhk7";
@@ -16,6 +17,7 @@ const supabaseClient = supabase.createClient(
 
 /* ---------- SESSION CHECK ---------- */
 let currentUser = null;
+let todaysAttempt = null;
 
 async function checkSession() {
 
@@ -28,6 +30,7 @@ async function checkSession() {
 
     const user = data.session.user;
     loadProfile(user.id);
+    loadDailyStatus(user.id);
 
     currentUser = data.session.user;
 }
@@ -88,38 +91,26 @@ const dailiesButton = document.getElementById("daily-start-button");
 
 dailiesButton.addEventListener("click", async function() {
 
-    const { data: today, error: dateError } = await supabaseClient
-        .rpc("get_juken_today");
+    // If no attempt exists yet, create one
+    if (todaysAttempt === null) {
 
-    if (dateError) {
-        console.error("Failed to get server date:", dateError);
-        return;
-    }
+        const { data: today, error: dateError } = await supabaseClient
+            .rpc("get_juken_today");
 
-    const { data, error } = await supabaseClient
-        .from("daily_attempts")
-        .select("id, current_question, score, completed")
-        .eq("user_id", currentUser.id)
-        .eq("challenge_date", today)
-        .maybeSingle();
-
-    if (error) {
-        console.error("Failed to check Daily attempt:", error);
-        return;
-    }
-
-    if ( data !== null) {
-
-        if (data.completed === true) {
-            alert("Dailies already completed today.");
-            return;
-
-        } else {
-            window.location.href = "daily.html";
+        if (dateError) {
+            console.error("Failed to get server date:", dateError);
             return;
         }
 
-    } else {
+        // Make sure today's Daily exists
+        const { error: challengeError } = await supabaseClient
+            .rpc("get_or_create_daily_challenge");
+
+        if (challengeError) {
+            console.error("Failed to create Daily challenge:", challengeError);
+            return;
+        }
+
         const { error: insertError } = await supabaseClient
             .from("daily_attempts")
             .insert({
@@ -131,7 +122,71 @@ dailiesButton.addEventListener("click", async function() {
             console.error("Failed to create Daily attempt:", insertError);
             return;
         }
-
-        window.location.href = "daily.html";
     }
+
+    // New attempt OR existing unfinished attempt
+    window.location.href = "daily.html";
+});
+
+//Daily check on load
+
+async function loadDailyStatus(userID) {
+
+    // authoritative JST date
+    const { data: today, error: dateError } = await supabaseClient
+        .rpc("get_juken_today");
+
+    //query daily_attempts
+    const { data, error } = await supabaseClient
+        .from("daily_attempts")
+        .select("current_question, completed")
+        .eq("user_id", userID)
+        .eq("challenge_date", today)
+        .maybeSingle();
+
+    const dailiesButton = document.getElementById("daily-start-button");
+    const dailyCompleted = document.getElementById("daily-completed");
+    const dailyProgress = document.querySelector(".daily-progress-text");
+
+    if (data === null) {
+        dailiesButton.textContent = "Start";
+        dailiesButton.disabled = false;
+        dailyProgress.classList.add("hidden");
+        }
+    else if (data.completed === true) {
+        dailiesButton.textContent = "Finished";
+        dailiesButton.disabled = true;
+        dailyProgress.classList.add("hidden");
+    }
+    else {
+        dailiesButton.textContent = "Continue";
+        dailiesButton.disabled = false;
+        dailyCompleted.textContent = data.current_question;
+        dailyProgress.classList.remove("hidden");
+    }
+
+    todaysAttempt = data;
+
+}
+
+const testTutorialSteps = [
+    {
+        target: ".daily-challenge",
+        title: "Daily Challenge",
+        text: "Try to complete your Daily Challenge every day.",
+        action: "next",
+        position: "bottom"
+    },
+
+    {
+        target: "#daily-start-button",
+        title: "Start Your Daily",
+        text: "Click here to start.",
+        action: "click",
+        position: "top"
+    }
+];
+
+startTutorial(testTutorialSteps, function() {
+    console.log("Tutorial complete!");
 });

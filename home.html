@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Ichiko</title>
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/tutorial.css">
 </head>
 
 <body>
@@ -64,20 +65,23 @@
 
     <!-- Daily Challenge -->
     <section class="daily-challenge">
-        <p class="section-label">DAILY CHALLENGE</p>
 
-        <h2>Today's Juken Challenge</h2>
+    <p class="section-label">DAILY CHALLENGE</p>
 
-        <div class="daily-progress">
-            <span id="daily-completed">0</span>
-            <span>/</span>
-            <span id="daily-total">10</span>
-        </div>
+    <h2>Today's Juken Challenge</h2>
 
-        <button id="daily-start-button">
-            Start
-        </button>
-    </section>
+    <p class="daily-progress-text">
+        <span id="daily-completed">0</span>
+        /
+        <span id="daily-total">4</span>
+        Daily Questions Complete
+    </p>
+
+    <button id="daily-start-button" class="daily-button">
+        Start
+    </button>
+
+</section>
 
 
     <!-- Study Modes -->
@@ -99,26 +103,6 @@
 
     </section>
 
-
-    <!-- Today's Progress -->
-    <section class="today-progress">
-
-        <div class="progress-heading">
-            <h2>Today's Progress</h2>
-
-            <span>
-                <span id="today-completed">0</span>
-                /
-                <span id="today-goal">10</span>
-            </span>
-        </div>
-
-        <div class="progress-bar">
-            <div id="progress-fill" class="progress-fill"></div>
-        </div>
-
-    </section>
-
 </main>
 
     <div id="logout-screen" class="logout-screen hidden">
@@ -126,7 +110,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/home.js"></script>
+    <script type="module" src="js/home.js"></script>
 
 </body>
 </html>
