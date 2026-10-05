@@ -108,7 +108,18 @@
 
     <section class="profile-section statistics-section">
 
-        <h2>STATISTICS</h2>
+        <div class="section-header">
+
+            <h2>STATISTICS</h2>
+
+            <button
+                    id="edit-statistics-button"
+                    class="edit-statistics-button"
+            >
+                Edit Visibility
+            </button>
+
+        </div>
 
         <div class="statistics-grid">
 
@@ -127,12 +138,16 @@
                 <span class="stat-label">Best Survival</span>
             </div>
 
+            <div class="stat">
+                <span id="accuracy" class="stat-value">--</span>
+                <span class="stat-label">Accuracy</span>
+            </div>
+
         </div>
 
     </section>
 
 </main>
-
 
 <!-- ==================== AVATAR SELECTOR ==================== -->
 
@@ -151,58 +166,19 @@
         </div>
 
 
-        <!-- Avatar Grid -->
+        <!-- Dynamically populated by profile.js -->
         <div id="avatar-grid" class="cosmetic-grid">
-
-            <!-- Default unlocked avatar -->
-            <button class="cosmetic-item selected">
-                <img
-                        src="assets/avatars/default.webp"
-                        alt="Default Avatar"
-                >
-            </button>
-
-
-            <!-- Example locked avatars -->
-            <button class="cosmetic-item locked">
-                <div class="cosmetic-image-wrapper">
-
-                    <img
-                            src="assets/avatars/avatar-02.webp"
-                            alt="Locked Avatar"
-                    >
-
-                    <span class="lock-icon">🔒</span>
-
-                </div>
-            </button>
-
-
-            <button class="cosmetic-item locked">
-                <div class="cosmetic-image-wrapper">
-
-                    <img
-                            src="assets/avatars/avatar-03.webp"
-                            alt="Locked Avatar"
-                    >
-
-                    <span class="lock-icon">🔒</span>
-
-                </div>
-            </button>
-
         </div>
 
 
-        <!-- Selected Cosmetic Information -->
         <div class="cosmetic-info">
 
             <h3 id="avatar-name">
-                Default Avatar
+                Select an Avatar
             </h3>
 
             <p id="avatar-description">
-                Available from the beginning.
+                Select an avatar to see more information.
             </p>
 
         </div>
@@ -210,7 +186,6 @@
     </div>
 
 </div>
-
 
 <!-- ==================== BANNER SELECTOR ==================== -->
 
@@ -229,152 +204,19 @@
         </div>
 
 
-        <!-- ==================== EDIT PROFILE ==================== -->
-
-        <div id="edit-profile-popup" class="cosmetic-popup hidden">
-
-            <div class="cosmetic-panel edit-profile-panel">
-
-                <div class="popup-header">
-
-                    <h2>Edit Profile</h2>
-
-                    <button id="close-edit-profile" class="close-button">
-                        ✕
-                    </button>
-
-                </div>
-
-
-                <div class="edit-profile-form">
-
-                    <!-- Display Name -->
-                    <label for="edit-display-name">
-                        Display Name
-                    </label>
-
-                    <input
-                            id="edit-display-name"
-                            type="text"
-                            maxlength="15"
-                    >
-
-                    <!-- Bio -->
-                    <label for="edit-bio">
-                        Bio
-                    </label>
-
-                    <textarea
-                            id="edit-bio"
-                            maxlength="150"
-                            rows="4"
-                    ></textarea>
-
-
-                    <!-- Birthday -->
-                    <label for="edit-birthday">
-                        Birthday
-                        <span class="optional-text">(Optional)</span>
-                    </label>
-
-                    <input
-                            id="edit-birthday"
-                            type="date"
-                    >
-
-                    <p id="birthday-warning" class="birthday-warning">
-                        Your birthday cannot be changed after it is set.
-                    </p>
-
-
-                    <!-- Error -->
-                    <p id="edit-profile-error" class="form-error hidden"></p>
-
-
-                    <!-- Actions -->
-                    <div class="edit-profile-actions">
-
-                        <button
-                                id="cancel-edit-profile"
-                                type="button"
-                                class="secondary-button"
-                        >
-                            Cancel
-                        </button>
-
-                        <button
-                                id="save-profile-button"
-                                type="button"
-                                class="primary-button"
-                        >
-                            Save Changes
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
+        <!-- Dynamically populated by profile.js -->
+        <div id="banner-grid" class="cosmetic-grid banner-grid">
         </div>
 
 
-        <!-- Banner Grid -->
-        <div id="banner-grid" class="banner-grid">
-
-            <button class="banner-item selected">
-
-                <img
-                        src="assets/banners/default.webp"
-                        alt="Default Banner"
-                >
-
-            </button>
-
-
-            <button class="banner-item locked">
-
-                <div class="cosmetic-image-wrapper">
-
-                    <img
-                            src="assets/banners/banner-02.webp"
-                            alt="Locked Banner"
-                    >
-
-                    <span class="lock-icon">🔒</span>
-
-                </div>
-
-            </button>
-
-
-            <button class="banner-item locked">
-
-                <div class="cosmetic-image-wrapper">
-
-                    <img
-                            src="assets/banners/banner-03.webp"
-                            alt="Locked Banner"
-                    >
-
-                    <span class="lock-icon">🔒</span>
-
-                </div>
-
-            </button>
-
-        </div>
-
-
-        <!-- Selected Banner Information -->
         <div class="cosmetic-info">
 
             <h3 id="banner-name">
-                Default Banner
+                Select a Banner
             </h3>
 
             <p id="banner-description">
-                Available from the beginning.
+                Select a banner to see more information.
             </p>
 
         </div>
@@ -383,6 +225,248 @@
 
 </div>
 
+
+<!-- ==================== EDIT PROFILE ==================== -->
+
+<div id="edit-profile-popup" class="cosmetic-popup hidden">
+
+    <div class="cosmetic-panel edit-profile-panel">
+
+        <div class="popup-header">
+
+            <h2>Edit Profile</h2>
+
+            <button id="close-edit-profile" class="close-button">
+                ✕
+            </button>
+
+        </div>
+
+        <div class="edit-profile-form">
+
+            <label for="edit-display-name">
+                Display Name
+            </label>
+
+            <input
+                    id="edit-display-name"
+                    type="text"
+                    maxlength="15"
+            >
+
+            <label for="edit-bio">
+                Bio
+            </label>
+
+            <textarea
+                    id="edit-bio"
+                    maxlength="150"
+                    rows="4"
+            ></textarea>
+
+            <!-- Birthday -->
+            <div id="birthday-section" class="birthday-section">
+
+                <label for="edit-birthday">
+                    Birthday
+                    <span class="optional-text">(Optional)</span>
+                </label>
+
+                <input
+                        id="edit-birthday"
+                        type="date"
+                >
+
+                <p id="birthday-warning" class="birthday-warning">
+                    Your birthday cannot be changed after it is set.
+                </p>
+
+            </div>
+
+            <p id="edit-profile-error" class="form-error hidden"></p>
+
+            <div class="edit-profile-actions">
+
+                <button
+                        id="cancel-edit-profile"
+                        type="button"
+                        class="secondary-button"
+                >
+                    Cancel
+                </button>
+
+                <button
+                        id="save-profile-button"
+                        type="button"
+                        class="primary-button"
+                >
+                    Save Changes
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ==================== STATISTICS VISIBILITY ==================== -->
+
+<div id="statistics-visibility-popup" class="cosmetic-popup hidden">
+
+    <div class="cosmetic-panel statistics-visibility-panel">
+
+        <div class="popup-header">
+
+            <h2>Statistics Visibility</h2>
+
+            <button
+                    id="close-statistics-visibility"
+                    class="close-button"
+            >
+                ✕
+            </button>
+
+        </div>
+
+
+        <p class="visibility-intro">
+            Choose which statistics other players can see.
+        </p>
+
+
+        <div class="statistics-visibility-options">
+
+            <!-- Questions Answered -->
+            <label class="visibility-option">
+
+                <div class="visibility-text">
+
+                    <span class="visibility-name">
+                        Questions Answered
+                    </span>
+
+                    <span class="visibility-description">
+                        Show your total answered questions to other players.
+                    </span>
+
+                </div>
+
+                <input
+                        id="show-questions-answered"
+                        type="checkbox"
+                >
+
+                <span class="toggle-switch"></span>
+
+            </label>
+
+
+            <!-- Current Streak -->
+            <label class="visibility-option">
+
+                <div class="visibility-text">
+
+                    <span class="visibility-name">
+                        Current Streak
+                    </span>
+
+                    <span class="visibility-description">
+                        Show your current daily streak to other players.
+                    </span>
+
+                </div>
+
+                <input
+                        id="show-current-streak"
+                        type="checkbox"
+                >
+
+                <span class="toggle-switch"></span>
+
+            </label>
+
+
+            <!-- Best Survival -->
+            <label class="visibility-option">
+
+                <div class="visibility-text">
+
+                    <span class="visibility-name">
+                        Best Survival
+                    </span>
+
+                    <span class="visibility-description">
+                        Show your best Survival score to other players.
+                    </span>
+
+                </div>
+
+                <input
+                        id="show-best-survival"
+                        type="checkbox"
+                >
+
+                <span class="toggle-switch"></span>
+
+            </label>
+
+            <label class="visibility-option">
+
+                <div class="visibility-text">
+
+                    <span class="visibility-name">
+            Accuracy
+        </span>
+
+                    <span class="visibility-description">
+            Show your Daily and Survival answer accuracy to other players.
+        </span>
+
+                </div>
+
+                <input
+                        id="show-accuracy"
+                        type="checkbox"
+                >
+
+                <span class="toggle-switch"></span>
+
+            </label>
+
+        </div>
+
+
+        <p
+                id="statistics-visibility-error"
+                class="form-error hidden"
+        ></p>
+
+
+        <div class="edit-profile-actions">
+
+            <button
+                    id="cancel-statistics-visibility"
+                    type="button"
+                    class="secondary-button"
+            >
+                Cancel
+            </button>
+
+            <button
+                    id="save-statistics-visibility"
+                    type="button"
+                    class="primary-button"
+            >
+                Save
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 
 <!-- ==================== SCRIPTS ==================== -->
 

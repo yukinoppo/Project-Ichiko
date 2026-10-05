@@ -558,6 +558,72 @@ body {
     opacity: 0.75;
 }
 
+/* ---------- FRIENDS BUTTON ---------- */
+
+.friends-button {
+    position: relative;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #1b2130;
+    color: white;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease;
+}
+
+.friends-button:hover {
+    background: #252c3d;
+    transform: translateY(-1px);
+}
+
+.friends-icon {
+    font-size: 19px;
+    line-height: 1;
+}
+
+
+/* Notification badge */
+
+.friends-notification {
+    position: absolute;
+
+    top: -3px;
+    right: -3px;
+
+    min-width: 17px;
+    height: 17px;
+
+    padding: 0 4px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 999px;
+
+    background: #ef4444;
+    color: white;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.friends-notification.hidden {
+    display: none;
+}
+
 
 /* =========================
    TABLET / DESKTOP

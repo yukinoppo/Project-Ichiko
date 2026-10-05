@@ -609,6 +609,369 @@ a {
     line-height: 1.5;
 }
 
+/* =========================================================
+   EDIT PROFILE
+   ========================================================= */
+
+.edit-profile-panel {
+    max-width: 520px;
+}
+
+
+/* ---------- FORM ---------- */
+
+.edit-profile-form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.edit-profile-form label {
+    margin-top: 8px;
+
+    color: #b9becc;
+
+    font-size: 13px;
+    font-weight: bold;
+}
+
+
+/* ---------- INPUTS ---------- */
+
+.edit-profile-form input,
+.edit-profile-form textarea {
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border: 1px solid #343c50;
+    border-radius: 9px;
+
+    outline: none;
+
+    background: #121720;
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.edit-profile-form textarea {
+    min-height: 100px;
+
+    resize: vertical;
+}
+
+.edit-profile-form input:focus,
+.edit-profile-form textarea:focus {
+    border-color: #7d8cff;
+
+    box-shadow: 0 0 0 2px rgba(125, 140, 255, 0.12);
+}
+
+
+/* ---------- BIRTHDAY ---------- */
+
+.optional-text {
+    margin-left: 4px;
+
+    color: #747c90;
+
+    font-size: 11px;
+    font-weight: normal;
+}
+
+.birthday-warning {
+    margin: 0;
+
+    color: #7f8799;
+
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.edit-profile-form input:disabled {
+    opacity: 0.55;
+
+    cursor: not-allowed;
+}
+
+
+/* ---------- ERROR ---------- */
+
+.form-error {
+    margin: 4px 0 0;
+
+    color: #ff7373;
+
+    font-size: 12px;
+}
+
+
+/* ---------- ACTION BUTTONS ---------- */
+
+.edit-profile-actions {
+    display: flex;
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 18px;
+}
+
+.edit-profile-actions button {
+    min-height: 42px;
+
+    padding: 9px 18px;
+
+    border-radius: 9px;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.secondary-button {
+    border: 1px solid #3c455c;
+
+    background: #252b39;
+    color: #d6d9e1;
+}
+
+.secondary-button:hover {
+    background: #30384a;
+}
+
+.primary-button {
+    border: 1px solid #7d8cff;
+
+    background: #6374f3;
+    color: #ffffff;
+}
+
+.primary-button:hover {
+    background: #7180f5;
+}
+
+.birthday-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    margin-top: 8px;
+}
+
+.birthday-locked {
+    opacity: 0.45;
+}
+
+.birthday-locked input {
+    cursor: not-allowed;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.edit-statistics-button {
+    padding: 7px 12px;
+
+    border: 1px solid #3c455c;
+    border-radius: 8px;
+
+    background: #252b39;
+    color: #d6d9e1;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.edit-statistics-button:hover {
+    background: #30384a;
+}
+
+/* ==================== STATISTICS VISIBILITY ==================== */
+
+.statistics-visibility-panel {
+    width: 100%;
+    max-width: 520px;
+}
+
+
+/* Intro text */
+
+.visibility-intro {
+    margin: 4px 0 16px;
+
+    color: #7f8799;
+
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* Container for all visibility options */
+
+.statistics-visibility-options {
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid #303749;
+    border-radius: 12px;
+
+    overflow: hidden;
+}
+
+
+/* Individual stat row */
+
+.visibility-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 16px;
+
+    background: #171c27;
+
+    cursor: pointer;
+
+    transition: background 0.15s ease;
+}
+
+.visibility-option + .visibility-option {
+    border-top: 1px solid #303749;
+}
+
+.visibility-option:hover {
+    background: #1d2330;
+}
+
+
+/* ==================== TEXT ==================== */
+
+.visibility-text {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+
+    min-width: 0;
+    flex: 1;
+}
+
+.visibility-name {
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.visibility-description {
+    color: #7f8799;
+
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+
+/* ==================== HIDE NORMAL CHECKBOX ==================== */
+
+.visibility-option input[type="checkbox"] {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+
+/* ==================== TOGGLE SWITCH ==================== */
+
+.toggle-switch {
+    position: relative;
+
+    width: 44px;
+    height: 24px;
+
+    flex: 0 0 44px;
+
+    border-radius: 999px;
+
+    background: #343b4c;
+
+    transition:
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* White toggle circle */
+
+.toggle-switch::after {
+    content: "";
+
+    position: absolute;
+
+    top: 3px;
+    left: 3px;
+
+    width: 18px;
+    height: 18px;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    transition: transform 0.2s ease;
+}
+
+
+/* ==================== TOGGLE ON ==================== */
+
+.visibility-option input[type="checkbox"]:checked + .toggle-switch {
+    background: #6374f3;
+}
+
+.visibility-option input[type="checkbox"]:checked + .toggle-switch::after {
+    transform: translateX(20px);
+}
+
+
+/* Keyboard focus */
+
+.visibility-option:has(input[type="checkbox"]:focus-visible)
+.toggle-switch {
+    box-shadow: 0 0 0 3px rgba(99, 116, 243, 0.25);
+}
+
+
+/* ==================== MOBILE ==================== */
+
+@media (max-width: 600px) {
+
+    .visibility-option {
+        padding: 14px;
+        gap: 14px;
+    }
+
+    .visibility-description {
+        font-size: 10px;
+    }
+
+}
 
 /* =========================================================
    TABLET

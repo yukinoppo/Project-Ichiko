@@ -1,0 +1,866 @@
+/* ==================================================
+   PROJECT ICHIKO
+   Friends Page
+================================================== */
+
+
+/* ---------- PAGE ---------- */
+
+.friends-page {
+    width: min(1050px, calc(100% - 40px));
+
+    margin: 0 auto;
+    padding: 48px 0 80px;
+}
+
+
+/* ---------- PAGE HEADING ---------- */
+
+.friends-heading {
+    margin-bottom: 30px;
+}
+
+.friends-heading h1 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.friends-heading p {
+    margin: 7px 0 0;
+
+    color: #81899a;
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+/* ==================================================
+   TABS
+================================================== */
+
+.friends-tabs {
+    position: relative;
+
+    display: flex;
+    align-items: stretch;
+
+    width: 100%;
+
+    margin-bottom: 30px;
+
+    border-bottom: 1px solid #303749;
+}
+
+
+/* Individual Tab */
+
+.friends-tab {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-height: 50px;
+
+    padding: 0 24px;
+
+    border: none;
+
+    background: transparent;
+    color: #777f91;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        color 0.15s ease,
+        background 0.15s ease;
+}
+
+
+.friends-tab:hover {
+    color: #d8dce5;
+
+    background: rgba(255, 255, 255, 0.025);
+}
+
+
+/* Active Tab */
+
+.friends-tab.active {
+    color: #ffffff;
+}
+
+
+/* Active underline */
+
+.friends-tab.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 16px;
+    right: 16px;
+    bottom: -1px;
+
+    height: 3px;
+
+    border-radius: 3px 3px 0 0;
+
+    background: #6374f3;
+}
+
+
+/* Friend Count */
+
+.tab-count {
+    min-width: 21px;
+    height: 21px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 6px;
+
+    border-radius: 999px;
+
+    background: #252c3c;
+    color: #9da5b6;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+/* Friend Request Notification */
+
+.tab-notification {
+    min-width: 20px;
+    height: 20px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 6px;
+
+    border-radius: 999px;
+
+    background: #ef4444;
+    color: #ffffff;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+/* ==================================================
+   TAB PANELS
+================================================== */
+
+.tab-panel {
+    width: 100%;
+}
+
+.tab-panel.hidden {
+    display: none;
+}
+
+
+/* ---------- PANEL HEADING ---------- */
+
+.panel-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
+
+.panel-heading h2 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.panel-heading p {
+    margin: 5px 0 0;
+
+    color: #737c8e;
+
+    font-size: 12px;
+}
+
+
+/* ==================================================
+   FRIEND LIST
+================================================== */
+
+.friends-list {
+    overflow: hidden;
+
+    border: 1px solid #303749;
+    border-radius: 12px;
+
+    background: #171c27;
+}
+
+
+/* Friend Row */
+
+.friend-row {
+    position: relative;
+
+    min-height: 82px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 14px 18px;
+
+    transition:
+        background 0.15s ease;
+}
+
+
+.friend-row + .friend-row {
+    border-top: 1px solid #2a3140;
+}
+
+
+.friend-row:hover {
+    background: #1c2230;
+}
+
+
+/* ---------- AVATAR ---------- */
+
+.friend-avatar {
+    width: 52px;
+    height: 52px;
+
+    flex: 0 0 52px;
+
+    display: block;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 2px solid #394155;
+
+    background: #252c3a;
+}
+
+
+/* ---------- PLAYER INFO ---------- */
+
+.friend-details {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    margin-left: 15px;
+}
+
+
+.friend-name {
+    overflow: hidden;
+
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.friend-uid {
+    color: #747d90;
+
+    font-size: 11px;
+    font-weight: 500;
+
+    letter-spacing: 0.2px;
+}
+
+
+/* ---------- VIEW PROFILE ---------- */
+
+.view-profile-button {
+    margin-left: auto;
+
+    padding: 8px 13px;
+
+    border: 1px solid #343c50;
+    border-radius: 7px;
+
+    background: transparent;
+
+    color: #a7afc0;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        color 0.15s ease,
+        background 0.15s ease,
+        border-color 0.15s ease;
+}
+
+
+.view-profile-button:hover {
+    color: #ffffff;
+
+    background: #252c3b;
+
+    border-color: #4b5570;
+}
+
+
+/* ==================================================
+   PLAYER SEARCH
+================================================== */
+
+.player-search {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    padding: 7px;
+
+    border: 1px solid #303749;
+    border-radius: 12px;
+
+    background: #171c27;
+
+    transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+
+.player-search:focus-within {
+    border-color: #6374f3;
+
+    box-shadow:
+        0 0 0 3px rgba(99, 116, 243, 0.1);
+}
+
+
+/* Search Input */
+
+.player-search input {
+    flex: 1;
+
+    min-width: 0;
+
+    height: 42px;
+
+    padding: 0 14px;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+    color: #ffffff;
+
+    font-size: 14px;
+}
+
+
+.player-search input::placeholder {
+    color: #636c7e;
+}
+
+
+/* Remove number arrows */
+
+.player-search input::-webkit-outer-spin-button,
+.player-search input::-webkit-inner-spin-button {
+    margin: 0;
+
+    -webkit-appearance: none;
+}
+
+.player-search input[type="number"] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+
+/* Search Button */
+
+#search-player-button {
+    height: 40px;
+
+    padding: 0 22px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #6374f3;
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease;
+}
+
+
+#search-player-button:hover {
+    background: #7483f7;
+
+    transform: translateY(-1px);
+}
+
+
+#search-player-button:active {
+    transform: translateY(0);
+}
+
+
+/* ==================================================
+   SEARCH RESULT
+================================================== */
+
+.search-result {
+    margin-top: 20px;
+}
+
+
+.search-result:empty {
+    display: none;
+}
+
+
+.search-result-card {
+    display: flex;
+    align-items: center;
+
+    min-height: 82px;
+
+    padding: 14px 18px;
+
+    border: 1px solid #303749;
+    border-radius: 12px;
+
+    background: #171c27;
+}
+
+
+.search-result-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-left: auto;
+}
+
+
+/* Add Friend */
+
+.add-friend-button {
+    padding: 9px 16px;
+
+    border: none;
+    border-radius: 7px;
+
+    background: #6374f3;
+    color: #ffffff;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease;
+}
+
+
+.add-friend-button:hover {
+    background: #7483f7;
+
+    transform: translateY(-1px);
+}
+
+
+.add-friend-button:active {
+    transform: translateY(0);
+}
+
+
+/* ==================================================
+   FRIEND REQUESTS
+================================================== */
+
+.requests-list {
+    overflow: hidden;
+
+    border: 1px solid #303749;
+    border-radius: 12px;
+
+    background: #171c27;
+}
+
+
+/* Request Row */
+
+.request-row {
+    min-height: 82px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 14px 18px;
+
+    transition:
+        background 0.15s ease;
+}
+
+
+.request-row + .request-row {
+    border-top: 1px solid #2a3140;
+}
+
+
+.request-row:hover {
+    background: #1c2230;
+}
+
+
+/* Request Buttons */
+
+.request-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-left: auto;
+}
+
+
+.accept-request-button {
+    padding: 9px 16px;
+
+    border: none;
+    border-radius: 7px;
+
+    background: #6374f3;
+    color: #ffffff;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease;
+}
+
+
+.accept-request-button:hover {
+    background: #7483f7;
+
+    transform: translateY(-1px);
+}
+
+
+.decline-request-button {
+    padding: 8px 14px;
+
+    border: 1px solid #3a4254;
+    border-radius: 7px;
+
+    background: transparent;
+    color: #9099aa;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        color 0.15s ease,
+        border-color 0.15s ease;
+}
+
+
+.decline-request-button:hover {
+    background: #252b39;
+
+    border-color: #4a5368;
+
+    color: #ffffff;
+}
+
+
+/* ==================================================
+   EMPTY STATES
+   We'll use these once JS generates the lists
+================================================== */
+
+.friends-empty {
+    min-height: 180px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+
+    border: 1px solid #303749;
+    border-radius: 12px;
+
+    background: #171c27;
+
+    text-align: center;
+}
+
+
+.friends-empty h3 {
+    margin: 0 0 6px;
+
+    color: #d9dde6;
+
+    font-size: 14px;
+}
+
+
+.friends-empty p {
+    margin: 0;
+
+    color: #737c8e;
+
+    font-size: 12px;
+}
+
+
+/* ==================================================
+   GENERAL HIDDEN
+================================================== */
+
+.hidden {
+    display: none !important;
+}
+
+
+/* ==================================================
+   RESPONSIVE
+================================================== */
+
+@media (max-width: 760px) {
+
+    .friends-page {
+        width: calc(100% - 28px);
+
+        padding-top: 34px;
+    }
+
+
+    /* Heading */
+
+    .friends-heading {
+        margin-bottom: 22px;
+    }
+
+    .friends-heading h1 {
+        font-size: 25px;
+    }
+
+
+    /* Tabs */
+
+    .friends-tabs {
+        overflow-x: auto;
+
+        margin-bottom: 24px;
+
+        scrollbar-width: none;
+    }
+
+    .friends-tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .friends-tab {
+        flex: 0 0 auto;
+
+        min-height: 46px;
+
+        padding: 0 17px;
+
+        white-space: nowrap;
+
+        font-size: 12px;
+    }
+
+
+    /* Friend / Request Rows */
+
+    .friend-row,
+    .request-row,
+    .search-result-card {
+        padding: 13px;
+    }
+
+
+    .friend-avatar {
+        width: 46px;
+        height: 46px;
+
+        flex-basis: 46px;
+    }
+
+
+    .friend-details {
+        margin-left: 11px;
+    }
+
+
+    /* Buttons */
+
+    .view-profile-button {
+        padding: 7px 10px;
+
+        font-size: 10px;
+    }
+
+
+    .request-actions {
+        gap: 5px;
+    }
+
+
+    .accept-request-button,
+    .decline-request-button {
+        padding: 8px 10px;
+
+        font-size: 10px;
+    }
+
+
+    /* Search */
+
+    .player-search {
+        padding: 5px;
+    }
+
+    #search-player-button {
+        padding: 0 16px;
+    }
+
+
+    .search-result-actions {
+        gap: 5px;
+    }
+
+    .add-friend-button {
+        padding: 8px 11px;
+    }
+
+}
+
+
+/* ==================================================
+   SMALL MOBILE
+================================================== */
+
+@media (max-width: 520px) {
+
+    .friends-page {
+        width: calc(100% - 20px);
+    }
+
+
+    .friends-heading p {
+        font-size: 11px;
+    }
+
+
+    /* Stack actions underneath when necessary */
+
+    .request-row,
+    .search-result-card {
+        flex-wrap: wrap;
+    }
+
+
+    .request-actions,
+    .search-result-actions {
+        width: 100%;
+
+        margin-top: 12px;
+        margin-left: 61px;
+    }
+
+
+    .request-actions button,
+    .search-result-actions button {
+        flex: 1;
+    }
+
+}
+/* ---------- BACK BUTTON ---------- */
+
+.back-home-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    margin-bottom: 22px;
+    padding: 8px 13px;
+
+    border: 1px solid #303749;
+    border-radius: 8px;
+
+    background: #171c27;
+    color: #aeb5c3;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        color 0.15s ease,
+        border-color 0.15s ease;
+}
+
+.back-home-button:hover {
+    background: #202634;
+    border-color: #4b5570;
+    color: #ffffff;
+}

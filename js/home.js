@@ -1,4 +1,4 @@
-import { startTutorial } from "./tutorial.js";
+import {startTutorial} from "./tutorial.js";
 
 /**
  * Project Ichiko
@@ -22,27 +22,35 @@ let todaysAttempt = null;
 
 async function checkSession() {
 
-    const { data, error } = await supabaseClient.auth.getSession();
+    const {data, error} =
+        await supabaseClient.auth.getSession();
 
-    if (data.session === null) {
-        window.location.href = "index.html?reason=login-required";
+    if (error) {
+        console.error("Session check failed:", error);
         return;
     }
 
-    const user = data.session.user;
-    loadProfile(user.id);
-    loadDailyStatus(user.id);
+    if (data.session === null) {
+        window.location.href =
+            "index.html?reason=login-required";
+        return;
+    }
 
     currentUser = data.session.user;
+
+    await loadProfile(currentUser.id);
+
+    loadDailyStatus(currentUser.id);
+    loadFriendNotifications(currentUser.id);
 }
 
 /* ---------- LOAD PROFILE ---------- */
 
 async function loadProfile(userID) {
 
-    const { data, error } = await supabaseClient
+    const {data, error} = await supabaseClient
         .from("profiles")
-        .select("display_name, tutorial_step, tutorial_completed")
+        .select("display_name, avatar_id, tutorial_step, tutorial_completed")
         .eq("id", userID)
         .single();
 
@@ -54,12 +62,23 @@ async function loadProfile(userID) {
     const displayName = document.getElementById("display-name");
     displayName.textContent = data.display_name;
 
+    homeProfileAvatar.src =
+        `assets/avatars/${data.avatar_id}.webp`;
+
+
     handleTutorialProgress(data);
 }
 
 
 /* ---------- DOM ELEMENTS ---------- */
+const homeProfileAvatar =
+    document.getElementById("profile-picture");
 
+const friendsButton =
+    document.getElementById("friends-button");
+
+const friendsNotification =
+    document.getElementById("friends-notification");
 
 /* ---------- HOMEPAGE FUNCTIONS ---------- */
 
@@ -67,7 +86,7 @@ async function loadProfile(userID) {
 const profileButton = document.getElementById("profile-button");
 const profileDropdown = document.getElementById("profile-dropdown");
 
-profileButton.addEventListener("click", function() {
+profileButton.addEventListener("click", function () {
     profileDropdown.classList.toggle("hidden");
 });
 
@@ -75,13 +94,13 @@ const profileLink = document.querySelector(
     "#profile-dropdown a[href='profile.html']"
 );
 
-profileLink.addEventListener("click", async function(event) {
+profileLink.addEventListener("click", async function (event) {
 
     if (currentTutorialProgress === 2) {
 
         event.preventDefault();
 
-        const { error } = await supabaseClient
+        const {error} = await supabaseClient
             .from("profiles")
             .update({
                 tutorial_step: 3
@@ -101,8 +120,8 @@ profileLink.addEventListener("click", async function(event) {
 const logoutButton = document.getElementById("logout-button");
 const logoutScreen = document.getElementById("logout-screen");
 
-logoutButton.addEventListener("click", async function(){
-    const { error } = await supabaseClient.auth.signOut();
+logoutButton.addEventListener("click", async function () {
+    const {error} = await supabaseClient.auth.signOut();
 
     if (error) {
         alert(error.message);
@@ -118,7 +137,7 @@ const dailiesButton = document.getElementById("daily-start-button");
 let tutorialDailyMode = false;
 let currentTutorialProgress = null;
 
-dailiesButton.addEventListener("click", async function() {
+dailiesButton.addEventListener("click", async function () {
 
     if (tutorialDailyMode === true) {
         window.location.href = "daily.html?tutorial=true";
@@ -128,7 +147,7 @@ dailiesButton.addEventListener("click", async function() {
     // If no attempt exists yet, create one
     if (todaysAttempt === null) {
 
-        const { data: today, error: dateError } = await supabaseClient
+        const {data: today, error: dateError} = await supabaseClient
             .rpc("get_juken_today");
 
         if (dateError) {
@@ -137,7 +156,7 @@ dailiesButton.addEventListener("click", async function() {
         }
 
         // Make sure today's Daily exists
-        const { error: challengeError } = await supabaseClient
+        const {error: challengeError} = await supabaseClient
             .rpc("get_or_create_daily_challenge");
 
         if (challengeError) {
@@ -145,7 +164,7 @@ dailiesButton.addEventListener("click", async function() {
             return;
         }
 
-        const { error: insertError } = await supabaseClient
+        const {error: insertError} = await supabaseClient
             .from("daily_attempts")
             .insert({
                 user_id: currentUser.id,
@@ -167,11 +186,11 @@ dailiesButton.addEventListener("click", async function() {
 async function loadDailyStatus(userID) {
 
     // authoritative JST date
-    const { data: today, error: dateError } = await supabaseClient
+    const {data: today, error: dateError} = await supabaseClient
         .rpc("get_juken_today");
 
     //query daily_attempts
-    const { data, error } = await supabaseClient
+    const {data, error} = await supabaseClient
         .from("daily_attempts")
         .select("current_question, completed")
         .eq("user_id", userID)
@@ -186,13 +205,11 @@ async function loadDailyStatus(userID) {
         dailiesButton.textContent = "Start";
         dailiesButton.disabled = false;
         dailyProgress.classList.add("hidden");
-        }
-    else if (data.completed === true) {
+    } else if (data.completed === true) {
         dailiesButton.textContent = "Finished";
         dailiesButton.disabled = true;
         dailyProgress.classList.add("hidden");
-    }
-    else {
+    } else {
         dailiesButton.textContent = "Continue";
         dailiesButton.disabled = false;
         dailyCompleted.textContent = data.current_question;
@@ -263,20 +280,20 @@ const homeAfterDailyTutorialSteps = [
     },
 
     {
-    target: "#profile-button",
-    title: "Profile & Settings",
-    text: "Click here to find your profile and various settings.",
-    action: "click",
-    position: "bottom"
+        target: "#profile-button",
+        title: "Profile & Settings",
+        text: "Click here to find your profile and various settings.",
+        action: "click",
+        position: "bottom"
     },
 
     {
-    target: "#profile-dropdown a[href='profile.html']",
-    parentHighlight: "#profile-dropdown",
-    title: "Your Profile",
-    text: "Click here to learn how to customize your profile.",
-    action: "click",
-    position: "bottom"
+        target: "#profile-dropdown a[href='profile.html']",
+        parentHighlight: "#profile-dropdown",
+        title: "Your Profile",
+        text: "Click here to learn how to customize your profile.",
+        action: "click",
+        position: "bottom"
     }
 ];
 
@@ -300,5 +317,42 @@ function handleTutorialProgress(profile) {
         return;
     }
 }
+
+/* ---------- FRIEND NOTIFICATIONS ---------- */
+
+async function loadFriendNotifications(userID) {
+
+    const { count, error } = await supabaseClient
+        .from("friend_requests")
+        .select("*", {
+            count: "exact",
+            head: true
+        })
+        .eq("receiver_id", userID);
+
+    if (error) {
+        console.error("Failed to load friend requests:", error);
+        return;
+    }
+
+    updateFriendsNotification(count);
+}
+
+function updateFriendsNotification(count) {
+
+    if (count <= 0) {
+        friendsNotification.classList.add("hidden");
+        return;
+    }
+
+    friendsNotification.textContent =
+        count > 9 ? "9+" : count;
+
+    friendsNotification.classList.remove("hidden");
+}
+
+friendsButton.addEventListener("click", function() {
+    window.location.href = "friends.html";
+});
 
 checkSession();

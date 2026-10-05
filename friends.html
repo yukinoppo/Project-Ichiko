@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Friends | Project Ichiko</title>
+
+    <!-- Reuse Home styling for identical top bar -->
+    <link rel="stylesheet" href="css/home.css">
+
+    <!-- Friends page styling -->
+    <link rel="stylesheet" href="css/friends.css">
+
+    <!-- Tutorial styling -->
+    <link rel="stylesheet" href="css/tutorial.css">
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     TOP BAR
+================================================== -->
+
+<header class="top-bar">
+
+    <!-- Game Title -->
+    <div class="game-title">
+        <h1>PROJECT ICHIKO</h1>
+    </div>
+
+
+    <!-- User Information -->
+    <div class="user-area">
+
+        <!-- Streak -->
+        <div class="streak">
+            🔥 <span id="streak-count">0</span>
+        </div>
+
+
+        <!-- Currency -->
+        <div class="currency">
+            💎 <span id="gem-count">0</span>
+        </div>
+
+
+        <!-- Friends Button -->
+        <button
+            id="friends-button"
+            class="friends-button"
+            aria-label="Friends"
+        >
+
+            <span class="friends-icon">
+                👥
+            </span>
+
+            <span
+                id="friends-notification"
+                class="friends-notification hidden"
+            >
+                0
+            </span>
+
+        </button>
+
+
+        <!-- Profile Button -->
+        <button
+            id="profile-button"
+            class="profile-button"
+        >
+
+            <img
+                id="profile-picture"
+                src="assets/avatars/default.webp"
+                alt="Profile Picture"
+            >
+
+            <span id="display-name">
+                Player
+            </span>
+
+            <span class="dropdown-arrow">
+                ▼
+            </span>
+
+        </button>
+
+
+        <!-- Profile Dropdown -->
+        <div
+            id="profile-dropdown"
+            class="profile-dropdown hidden"
+        >
+
+            <a href="profile.html">
+                Profile
+            </a>
+
+            <a href="settings.html">
+                Settings
+            </a>
+
+            <button id="logout-button">
+                Logout
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- ==================================================
+     FRIENDS PAGE
+================================================== -->
+
+<main
+    id="friends-page"
+    class="friends-page"
+>
+  <!-- Back to Home -->
+<button
+    id="back-home-button"
+    class="back-home-button"
+    type="button"
+>
+    ← Back
+</button>
+
+
+    <!-- ==================================================
+         PAGE HEADING
+    ================================================== -->
+
+    <section
+        id="friends-heading"
+        class="friends-heading"
+    >
+
+        <h1>FRIENDS</h1>
+
+        <p>
+            Connect with friends and other Project Ichiko players.
+        </p>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         FRIENDS NAVIGATION
+    ================================================== -->
+
+    <nav
+        id="friends-navigation"
+        class="friends-tabs"
+    >
+
+
+        <!-- Friends Tab -->
+        <button
+            id="friends-tab"
+            class="friends-tab active"
+            data-tab="friends"
+        >
+
+            <span>
+                Friends
+            </span>
+
+            <span
+                id="friend-count"
+                class="tab-count"
+            >
+                3
+            </span>
+
+        </button>
+
+
+
+        <!-- Search Tab -->
+        <button
+            id="search-tab"
+            class="friends-tab"
+            data-tab="search"
+        >
+
+            Search Player UID
+
+        </button>
+
+
+
+        <!-- Requests Tab -->
+        <button
+            id="requests-tab"
+            class="friends-tab"
+            data-tab="requests"
+        >
+
+            <span>
+                Friend Requests
+            </span>
+
+            <span
+                id="request-count"
+                class="tab-notification"
+            >
+                2
+            </span>
+
+        </button>
+
+
+    </nav>
+
+
+
+    <!-- ==================================================
+         FRIENDS TAB
+    ================================================== -->
+
+    <section
+        id="friends-panel"
+        class="tab-panel"
+    >
+
+
+        <div
+            id="friends-panel-heading"
+            class="panel-heading"
+        >
+
+            <div>
+
+                <h2>
+                    Your Friends
+                </h2>
+
+                <p>
+                    Players you've added as friends.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div
+            id="friends-list"
+            class="friends-list"
+        >
+
+
+            <!-- Temporary Friend -->
+
+            <div class="friend-row">
+
+                <img
+                    class="friend-avatar"
+                    src="assets/avatars/default.webp"
+                    alt="Player Avatar"
+                >
+
+
+                <div class="friend-details">
+
+                    <span class="friend-name">
+                        Ichika
+                    </span>
+
+                    <span class="friend-uid">
+                        UID 100018
+                    </span>
+
+                </div>
+
+
+                <button class="view-profile-button">
+                    View Profile
+                </button>
+
+            </div>
+
+
+
+            <!-- Temporary Friend -->
+
+            <div class="friend-row">
+
+                <img
+                    class="friend-avatar"
+                    src="assets/avatars/default.webp"
+                    alt="Player Avatar"
+                >
+
+
+                <div class="friend-details">
+
+                    <span class="friend-name">
+                        Ren
+                    </span>
+
+                    <span class="friend-uid">
+                        UID 100021
+                    </span>
+
+                </div>
+
+
+                <button class="view-profile-button">
+                    View Profile
+                </button>
+
+            </div>
+
+
+
+            <!-- Temporary Friend -->
+
+            <div class="friend-row">
+
+                <img
+                    class="friend-avatar"
+                    src="assets/avatars/default.webp"
+                    alt="Player Avatar"
+                >
+
+
+                <div class="friend-details">
+
+                    <span class="friend-name">
+                        Sora
+                    </span>
+
+                    <span class="friend-uid">
+                        UID 100031
+                    </span>
+
+                </div>
+
+
+                <button class="view-profile-button">
+                    View Profile
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         SEARCH PLAYER TAB
+    ================================================== -->
+
+    <section
+        id="search-panel"
+        class="tab-panel hidden"
+    >
+
+
+        <div
+            id="search-panel-heading"
+            class="panel-heading"
+        >
+
+            <div>
+
+                <h2>
+                    Search Player
+                </h2>
+
+                <p>
+                    Find another player using their Player UID.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Tutorial can highlight this entire area -->
+        <div
+            id="player-search-area"
+            class="player-search"
+        >
+
+            <input
+                id="player-uid-input"
+                type="number"
+                placeholder="Enter Player UID"
+                autocomplete="off"
+            >
+
+            <button
+                id="search-player-button"
+                type="button"
+            >
+                Search
+            </button>
+
+        </div>
+        <!-- Search Result Area -->
+<div
+    id="search-result"
+    class="search-result"
+>
+</div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         FRIEND REQUESTS TAB
+    ================================================== -->
+
+    <section
+        id="requests-panel"
+        class="tab-panel hidden"
+    >
+
+
+        <div
+            id="requests-panel-heading"
+            class="panel-heading"
+        >
+
+            <div>
+
+                <h2>
+                    Friend Requests
+                </h2>
+
+                <p>
+                    Players who want to add you as a friend.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Tutorial can highlight the whole request area -->
+        <div
+            id="requests-list"
+            class="requests-list"
+        >
+
+
+            <!-- Temporary Request -->
+
+            <div class="request-row">
+
+                <img
+                    class="friend-avatar"
+                    src="assets/avatars/default.webp"
+                    alt="Player Avatar"
+                >
+
+
+                <div class="friend-details">
+
+                    <span class="friend-name">
+                        Yuki
+                    </span>
+
+                    <span class="friend-uid">
+                        UID 100027
+                    </span>
+
+                </div>
+
+
+                <div class="request-actions">
+
+                    <button
+                        class="accept-request-button"
+                        type="button"
+                    >
+                        Accept
+                    </button>
+
+                    <button
+                        class="decline-request-button"
+                        type="button"
+                    >
+                        Decline
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Temporary Request -->
+
+            <div class="request-row">
+
+                <img
+                    class="friend-avatar"
+                    src="assets/avatars/default.webp"
+                    alt="Player Avatar"
+                >
+
+
+                <div class="friend-details">
+
+                    <span class="friend-name">
+                        Haru
+                    </span>
+
+                    <span class="friend-uid">
+                        UID 100042
+                    </span>
+
+                </div>
+
+
+                <div class="request-actions">
+
+                    <button
+                        class="accept-request-button"
+                        type="button"
+                    >
+                        Accept
+                    </button>
+
+                    <button
+                        class="decline-request-button"
+                        type="button"
+                    >
+                        Decline
+                    </button>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<!-- ==================================================
+     SCRIPTS
+================================================== -->
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script type="module" src="js/friends.js"></script>
+
+</body>
+
+</html>
