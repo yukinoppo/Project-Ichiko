@@ -1,4 +1,10 @@
 import { supabaseClient } from "./supabase.js";
+import { startTutorial } from "./tutorial.js";
+
+const params = new URLSearchParams(window.location.search);
+const tutorialMode = params.get("tutorial") === "true";
+
+console.log("Tutorial mode:", tutorialMode);
 
 // ================================
 // GLOBAL VARIABLES
@@ -14,6 +20,41 @@ let selectedAnswer = null;
 let answerSubmitted = false;
 
 const DAILY_QUESTION_COUNT = 4;
+
+const dailyTutorialSteps = [
+    {
+        target: "#question-card",
+        title: "Daily Questions",
+        text: "Each day, you'll get 4 questions to complete.",
+        action: "next",
+        position: "top"
+    },
+
+    {
+        target: ".answer-list",
+        clickTarget: ".answer-button",
+        title: "Choose an Answer",
+        text: "Select the answer you think is correct.",
+        action: "click",
+        position: "top"
+    },
+
+    {
+    target: "#next-question-button",
+    title: "Check Your Answer",
+    text: "Once you've chosen an answer, click here to check your answer.",
+    action: "click",
+    position: "top"
+    },
+
+     {
+        target: "#question-card",
+        title: "You're Done!",
+        text: "After submitting, you'll immediately see whether your answer was correct. Complete all 4 questions each day!",
+        action: "next",
+        position: "top"
+    }
+];
 
 
 // ================================
@@ -67,7 +108,13 @@ async function checkSession() {
     }
 
     currentUser = data.session.user;
-    loadDaily();
+
+    if (tutorialMode === true) {
+        loadTutorialDaily();
+    }
+    else {
+        loadDaily();
+    }
 }
 
 //Answer Buttons
@@ -90,6 +137,57 @@ answerButtons.forEach(function(button) {
 
 });
 
+// ================================
+// TUTORIAL ANSWER
+// ================================
+
+function handleTutorialAnswer(selectedAnswer) {
+
+    if (selectedAnswer === null) {
+        return;
+    }
+
+    answerButtons.forEach(function(button) {
+        button.classList.remove("selected");
+    });
+
+    if (selectedAnswer === currentQuestion.correct_answer) {
+
+        const selectedButton = document.querySelector(
+            `[data-answer="${selectedAnswer}"]`
+        );
+
+        selectedButton.classList.add("correct");
+
+        feedbackText.textContent = "Correct!";
+        answerFeedback.classList.remove("hidden");
+
+    } else {
+
+        const selectedButton = document.querySelector(
+            `[data-answer="${selectedAnswer}"]`
+        );
+
+        const correctButton = document.querySelector(
+            `[data-answer="${currentQuestion.correct_answer}"]`
+        );
+
+        selectedButton.classList.add("wrong");
+        correctButton.classList.add("correct");
+
+        feedbackText.textContent = "Incorrect!";
+        answerFeedback.classList.remove("hidden");
+    }
+
+    answerSubmitted = true;
+
+    answerButtons.forEach(function(button) {
+        button.disabled = true;
+    });
+
+    nextQuestionButton.textContent = "Next";
+}
+
 //Submit and Next Button
 nextQuestionButton.addEventListener("click", function() {
 
@@ -99,17 +197,74 @@ nextQuestionButton.addEventListener("click", function() {
             return;
         }
 
-        handleAnswer(selectedAnswer);
+        if (tutorialMode === true) {
+            handleTutorialAnswer(selectedAnswer);
+        }
+        else {
+            handleAnswer(selectedAnswer)
+        }
 
     } else {
-
-        nextQuestion();
+        if (tutorialMode === true) {
+            console.log("Tutorial question finished");
+        }
+        else {
+            nextQuestion();
+        }
 
     }
 
 });
 
 
+// ================================
+// LOAD TUTORIAL DAILY
+// ================================
+
+async function loadTutorialDaily() {
+
+    const { data: question, error: questionError } =
+        await supabaseClient
+            .from("questions")
+            .select(`
+                id,
+                subject,
+                topic,
+                question_text,
+                option_a,
+                option_b,
+                option_c,
+                option_d,
+                correct_answer
+            `)
+            .eq("id", 1)
+            .single();
+
+    if (questionError) {
+        console.error("Failed to load tutorial question:", questionError);
+        return;
+    }
+
+    currentQuestion = question;
+
+    displayQuestion();
+
+    startTutorial(dailyTutorialSteps, async function() {
+        const { error } = await supabaseClient
+            .from("profiles")
+            .update({
+                tutorial_step: 2
+            })
+            .eq ("id", currentUser.id);
+
+        if (error) {
+            console.error("Failed to save tutorial progress", error);
+            return;
+        }
+
+        window.location.href = "home.html";
+    });
+}
 
 // ================================
 // LOAD DAILY

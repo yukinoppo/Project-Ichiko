@@ -302,3 +302,19 @@
         width: 100%;
     }
 }
+
+.profile-dropdown.tutorial-dropdown-active {
+    z-index: 9001;
+}
+
+.profile-dropdown.tutorial-dropdown-active a,
+.profile-dropdown.tutorial-dropdown-active button {
+    opacity: 0.25;
+    pointer-events: none;
+}
+
+.profile-dropdown.tutorial-dropdown-active .tutorial-highlight {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 9002;
+}

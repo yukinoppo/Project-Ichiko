@@ -6,6 +6,7 @@ import { startTutorial } from "./tutorial.js";
  *
  * Handles session validation and homepage functionality.
  */
+
 /* ---------- SUPABASE SETUP ---------- */
 const SUPABASE_URL = "https://lzxbsruzaqqjlqyhtvwx.supabase.co";
 const SUPABASE_KEY = "sb_publishable_40Diyrrl6ZJUP_AssHf5WA_gTYSAhk7";
@@ -41,7 +42,7 @@ async function loadProfile(userID) {
 
     const { data, error } = await supabaseClient
         .from("profiles")
-        .select("display_name")
+        .select("display_name, tutorial_step, tutorial_completed")
         .eq("id", userID)
         .single();
 
@@ -52,10 +53,10 @@ async function loadProfile(userID) {
 
     const displayName = document.getElementById("display-name");
     displayName.textContent = data.display_name;
+
+    handleTutorialProgress(data);
 }
 
-
-checkSession();
 
 /* ---------- DOM ELEMENTS ---------- */
 
@@ -68,6 +69,32 @@ const profileDropdown = document.getElementById("profile-dropdown");
 
 profileButton.addEventListener("click", function() {
     profileDropdown.classList.toggle("hidden");
+});
+
+const profileLink = document.querySelector(
+    "#profile-dropdown a[href='profile.html']"
+);
+
+profileLink.addEventListener("click", async function(event) {
+
+    if (currentTutorialProgress === 2) {
+
+        event.preventDefault();
+
+        const { error } = await supabaseClient
+            .from("profiles")
+            .update({
+                tutorial_step: 3
+            })
+            .eq("id", currentUser.id);
+
+        if (error) {
+            console.error("Failed to save tutorial progress:", error);
+            return;
+        }
+
+        window.location.href = "profile.html?tutorial=true";
+    }
 });
 
 //Logout Button
@@ -88,8 +115,15 @@ logoutButton.addEventListener("click", async function(){
 
 //Dailies button
 const dailiesButton = document.getElementById("daily-start-button");
+let tutorialDailyMode = false;
+let currentTutorialProgress = null;
 
 dailiesButton.addEventListener("click", async function() {
+
+    if (tutorialDailyMode === true) {
+        window.location.href = "daily.html?tutorial=true";
+        return;
+    }
 
     // If no attempt exists yet, create one
     if (todaysAttempt === null) {
@@ -187,6 +221,84 @@ const testTutorialSteps = [
     }
 ];
 
-startTutorial(testTutorialSteps, function() {
-    console.log("Tutorial complete!");
-});
+const homeAfterDailyTutorialSteps = [
+    {
+        target: ".streak",
+        title: "Daily Streak 🔥",
+        text: "Complete your Dailies every day to build your streak. Keep it going to earn prizes!",
+        action: "next",
+        position: "bottom"
+    },
+
+    {
+        target: ".currency",
+        title: "Gems 💎",
+        text: "Earn Gems by playing and completing challenges. You can use them for rewards in-game!",
+        action: "next",
+        position: "bottom"
+    },
+
+    {
+        target: "#practice-button",
+        title: "Practice",
+        text: "Practice questions and learn topics you're not confident about.",
+        action: "next",
+        position: "top"
+    },
+
+    {
+        target: "#survival-button",
+        title: "Survival",
+        text: "Test yourself in Survival, set high scores, and earn prizes!",
+        action: "next",
+        position: "top"
+    },
+
+    {
+        target: "#ranked-button",
+        title: "Ranked 🏆",
+        text: "Compete with your friends, climb the leaderboards, and earn special prizes!",
+        action: "next",
+        position: "top"
+    },
+
+    {
+    target: "#profile-button",
+    title: "Profile & Settings",
+    text: "Click here to find your profile and various settings.",
+    action: "click",
+    position: "bottom"
+    },
+
+    {
+    target: "#profile-dropdown a[href='profile.html']",
+    parentHighlight: "#profile-dropdown",
+    title: "Your Profile",
+    text: "Click here to learn how to customize your profile.",
+    action: "click",
+    position: "bottom"
+    }
+];
+
+function handleTutorialProgress(profile) {
+
+    currentTutorialProgress = profile.tutorial_step;
+
+    if (profile.tutorial_completed === true) {
+        return;
+    }
+
+    if (profile.tutorial_step === 0) {
+
+        tutorialDailyMode = true;
+        startTutorial(testTutorialSteps);
+        return;
+
+    } else if (profile.tutorial_step === 2) {
+
+        startTutorial(homeAfterDailyTutorialSteps);
+        return;
+    }
+}
+
+checkSession();

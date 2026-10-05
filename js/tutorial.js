@@ -4,8 +4,10 @@
 let tutorialSteps = [];
 let currentTutorialStep = 0;
 let currentTarget = null;
+let currentClickTargets = [];
 
 let tutorialCompleteCallback = null;
+let currentParentHighlight = null;
 
 
 // ========================================
@@ -79,28 +81,60 @@ function showTutorialStep() {
 
     currentTarget.classList.add("tutorial-highlight");
 
-    tutorialStepText.textContent = (currentTutorialStep + 1) + " / " + tutorialSteps.length;
+    if (step.parentHighlight) {
 
-    tutorialTitle.textContent = step.title
+    currentParentHighlight =
+        document.querySelector(step.parentHighlight);
 
+    currentParentHighlight.classList.add(
+        "tutorial-dropdown-active"
+    );
+    }
+
+    tutorialStepText.textContent =
+        (currentTutorialStep + 1) + " / " + tutorialSteps.length;
+
+    tutorialTitle.textContent = step.title;
     tutorialText.textContent = step.text;
 
     if (step.action === "next") {
+
         tutorialNextButton.classList.remove("tutorial-hidden");
 
     }
 
     else if (step.action === "click") {
+
         tutorialNextButton.classList.add("tutorial-hidden");
 
-        currentTarget.addEventListener("click", handleTargetClick);
+        if (step.clickTarget) {
+
+            currentClickTargets = Array.from(
+                document.querySelectorAll(step.clickTarget)
+            );
+
+        }
+
+        else {
+
+            currentClickTargets = [currentTarget];
+
+        }
+
+        currentClickTargets.forEach(function(target) {
+
+            target.addEventListener("click", handleTargetClick);
+
+        });
     }
 
+
+    // Show tutorial UI
     tutorialOverlay.classList.remove("tutorial-hidden");
     tutorialBox.classList.remove("tutorial-hidden");
 
+    // Position box beside highlighted element
     positionTutorialBox(currentTarget, step.position);
-
 }
 
 function handleTargetClick() {
@@ -142,7 +176,6 @@ function positionTutorialBox(target, position) {
     const screenPadding = 16;
 
     if (position === "bottom") {
-
         top = targetRect.bottom + gap;
 
         left =
@@ -151,7 +184,6 @@ function positionTutorialBox(target, position) {
             - (boxRect.width / 2);
 
     } else if (position === "top") {
-
         top = targetRect.top - boxRect.height - gap;
 
         left =
@@ -160,20 +192,28 @@ function positionTutorialBox(target, position) {
             - (boxRect.width / 2);
     }
 
+    // Prevent below screen glitching
     if (top + boxRect.height > window.innerHeight - screenPadding) {
-
         top = targetRect.top - boxRect.height - gap;
     }
 
+    // Prevent above screen glitching
     if (top < screenPadding) {
-
         top = screenPadding;
     }
 
+    // Prevent right side glitching
+    if (left + boxRect.width > window.innerWidth - screenPadding) {
+        left = window.innerWidth - boxRect.width - screenPadding;
+    }
+
+    // Prevent left side glitching
+    if (left < screenPadding) {
+        left = screenPadding;
+    }
 
     tutorialBox.style.top = `${top}px`;
     tutorialBox.style.left = `${left}px`;
-
 }
 
 
@@ -188,9 +228,22 @@ function removeHighlight() {
         currentTarget.classList.remove("tutorial-highlight");
         currentTarget.classList.remove("pulse");
 
-        currentTarget.removeEventListener("click", handleTargetClick);
-
         currentTarget = null;
+    }
+
+    currentClickTargets.forEach(function(target) {
+        target.removeEventListener("click", handleTargetClick);
+    });
+
+    currentClickTargets = [];
+
+    if (currentParentHighlight !== null) {
+
+        currentParentHighlight.classList.remove(
+            "tutorial-dropdown-active"
+        );
+
+        currentParentHighlight = null;
     }
 }
 

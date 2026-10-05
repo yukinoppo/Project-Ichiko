@@ -45,23 +45,22 @@ async function checkSession() {
 checkSession();
 
 //Register clicked
-registerTab.addEventListener("click", function() {
+registerTab.addEventListener("click", function () {
     loginForm.classList.add("hidden");
     registerForm.classList.remove("hidden");
 });
 
 //Login clicked
-loginTab.addEventListener("click", function() {
+loginTab.addEventListener("click", function () {
     registerForm.classList.add("hidden");
     loginForm.classList.remove("hidden");
 });
 
 //Registration Submitted
-registerForm.addEventListener("submit", async function(event) {
+registerForm.addEventListener("submit", async function (event) {
 
     event.preventDefault();
 
-    const username = document.getElementById("register-username").value;
     const displayName = document.getElementById("register-display-name").value;
     const email = document.getElementById("register-email").value;
     const password = document.getElementById("register-password").value;
@@ -72,13 +71,12 @@ registerForm.addEventListener("submit", async function(event) {
         return;
     }
 
-    const { data, error } = await supabaseClient.auth.signUp({
+    const {data, error} = await supabaseClient.auth.signUp({
         email: email,
         password: password,
 
         options: {
             data: {
-                username: username,
                 display_name: displayName
             }
         }
@@ -97,14 +95,14 @@ registerForm.addEventListener("submit", async function(event) {
 });
 
 //Login
-loginForm.addEventListener("submit", async function(event){
+loginForm.addEventListener("submit", async function (event) {
 
     event.preventDefault();
 
     const email = document.getElementById("login-email").value;
     const password = document.getElementById("login-password").value;
 
-    const { data, error } = await supabaseClient.auth.signInWithPassword({
+    const {data, error} = await supabaseClient.auth.signInWithPassword({
         email: email,
         password: password,
     });
