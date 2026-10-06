@@ -23,6 +23,7 @@ import {startTutorial} from "./tutorial.js";
 
 let currentUser = null;
 let currentProfile = null;
+let friendPendingRemoval = null;
 
 
 /* ==================================================
@@ -30,6 +31,12 @@ let currentProfile = null;
 ================================================== */
 const backHomeButton =
     document.getElementById("back-home-button");
+
+const playerProfileModal =
+    document.getElementById("player-profile-modal");
+
+const closePlayerProfileButton =
+    document.getElementById("close-player-profile");
 
 /* ---------- Top Bar ---------- */
 
@@ -108,6 +115,49 @@ const requestsList =
 const requestCount =
     document.getElementById("request-count");
 
+/* ---------- Public Profile Data ---------- */
+
+const publicProfileBanner =
+    document.getElementById("public-profile-banner-image");
+
+const publicProfileAvatar =
+    document.getElementById("public-profile-avatar");
+
+const publicProfileName =
+    document.getElementById("public-profile-name");
+
+const publicProfileUID =
+    document.getElementById("public-profile-uid");
+
+const publicProfileBio =
+    document.getElementById("public-profile-bio-text");
+
+const publicStatAccuracy =
+    document.getElementById("public-stat-accuracy");
+
+const publicStatStreak =
+    document.getElementById("public-stat-streak");
+
+const publicStatSurvival =
+    document.getElementById("public-stat-survival");
+
+const publicProfileActions =
+    document.getElementById("public-profile-actions");
+
+/* ---------- Remove Friend Modal ---------- */
+
+const removeFriendModal =
+    document.getElementById("remove-friend-modal");
+
+const removeFriendMessage =
+    document.getElementById("remove-friend-message");
+
+const cancelRemoveFriendButton =
+    document.getElementById("cancel-remove-friend");
+
+const confirmRemoveFriendButton =
+    document.getElementById("confirm-remove-friend");
+
 
 /* ==================================================
    TAB GROUPS
@@ -151,6 +201,8 @@ async function checkSession() {
     currentUser = data.session.user;
 
     await loadProfile(currentUser.id);
+    await loadFriends();
+    await loadFriendRequests();
 
     // Later:
     // await loadFriends();
@@ -222,20 +274,285 @@ function switchTab(selectedTab, selectedPanel) {
 
 async function loadFriends() {
 
-    // We'll build this next.
+    const {data, error} =
+        await supabaseClient.rpc(
+            "get_friends"
+        );
 
+    if (error) {
+
+        console.error(
+            "Failed to load friends:",
+            error
+        );
+
+        return;
+    }
+
+    displayFriends(data);
+
+    friendCount.textContent =
+        data.length;
 }
 
 
 function displayFriends(friends) {
 
-    // Eventually:
-    // friendsList.innerHTML = "";
-    //
-    // Loop through friends
-    // Create player rows
-    // Add View Profile buttons
+    // Remove anything currently displayed
+    friendsList.innerHTML = "";
 
+
+    // No friends
+    if (friends.length === 0) {
+
+        friendsList.innerHTML = `
+            <div class="friends-empty">
+                <h3>No Friends Yet</h3>
+                <p>Search for a Player UID to add someone.</p>
+            </div>
+        `;
+
+        return;
+    }
+
+
+    // Create one row for every friend
+    friends.forEach(function (friend) {
+
+        /* ---------- ROW ---------- */
+
+        const row =
+            document.createElement("div");
+
+        row.classList.add("friend-row");
+
+
+        /* ---------- AVATAR ---------- */
+
+        const avatar =
+            document.createElement("img");
+
+        avatar.classList.add("friend-avatar");
+
+        avatar.src =
+            `assets/avatars/${friend.avatar_id}.webp`;
+
+        avatar.alt =
+            "Player Avatar";
+
+
+        /* ---------- PLAYER DETAILS ---------- */
+
+        const details =
+            document.createElement("div");
+
+        details.classList.add("friend-details");
+
+
+        const name =
+            document.createElement("span");
+
+        name.classList.add("friend-name");
+
+        name.textContent =
+            friend.display_name;
+
+
+        const uid =
+            document.createElement("span");
+
+        uid.classList.add("friend-uid");
+
+        uid.textContent =
+            `UID ${friend.player_uid}`;
+
+
+        details.appendChild(name);
+        details.appendChild(uid);
+
+
+        /* ---------- VIEW PROFILE BUTTON ---------- */
+
+        const viewProfileButton =
+            document.createElement("button");
+
+        viewProfileButton.classList.add(
+            "view-profile-button"
+        );
+
+        viewProfileButton.textContent =
+            "View Profile";
+
+        viewProfileButton.type =
+            "button";
+
+
+        /* ---------- MORE OPTIONS ---------- */
+
+        const moreArea =
+            document.createElement("div");
+
+        moreArea.classList.add(
+            "friend-more-area"
+        );
+
+
+        const moreButton =
+            document.createElement("button");
+
+        moreButton.classList.add(
+            "friend-more-button"
+        );
+
+        moreButton.type =
+            "button";
+
+        moreButton.textContent =
+            "⋯";
+
+        moreButton.setAttribute(
+            "aria-label",
+            "Friend options"
+        );
+
+
+        const moreMenu =
+            document.createElement("div");
+
+        moreMenu.classList.add(
+            "friend-more-menu",
+            "hidden"
+        );
+
+
+        const removeFriendButton =
+            document.createElement("button");
+
+        removeFriendButton.classList.add(
+            "remove-friend-option"
+        );
+
+        removeFriendButton.type =
+            "button";
+
+        removeFriendButton.textContent =
+            "Remove Friend";
+
+
+        /* ---------- MORE MENU EVENTS ---------- */
+
+        moreButton.addEventListener(
+            "click",
+            function (event) {
+
+                event.stopPropagation();
+
+                const wasOpen =
+                    !moreMenu.classList.contains(
+                        "hidden"
+                    );
+
+                // Close every friend's menu first
+                closeAllFriendMenus();
+
+                // If this one wasn't already open,
+                // open it now
+                if (!wasOpen) {
+
+                    moreMenu.classList.remove(
+                        "hidden"
+                    );
+
+                }
+
+            }
+        );
+
+
+        removeFriendButton.addEventListener(
+            "click",
+            function (event) {
+
+                event.stopPropagation();
+
+                closeAllFriendMenus();
+
+                openRemoveFriendConfirmation(
+                    friend
+                );
+
+            }
+        );
+
+
+        /* ---------- PROFILE EVENTS ---------- */
+
+        avatar.addEventListener(
+            "click",
+            function () {
+
+                openPlayerProfile(
+                    friend.player_uid
+                );
+
+            }
+        );
+
+
+        details.addEventListener(
+            "click",
+            function () {
+
+                openPlayerProfile(
+                    friend.player_uid
+                );
+
+            }
+        );
+
+
+        viewProfileButton.addEventListener(
+            "click",
+            function () {
+
+                openPlayerProfile(
+                    friend.player_uid
+                );
+
+            }
+        );
+
+
+        /* ---------- BUILD MORE MENU ---------- */
+
+        moreMenu.appendChild(
+            removeFriendButton
+        );
+
+        moreArea.appendChild(
+            moreButton
+        );
+
+        moreArea.appendChild(
+            moreMenu
+        );
+
+
+        /* ---------- BUILD ROW ---------- */
+
+        row.appendChild(avatar);
+        row.appendChild(details);
+        row.appendChild(
+            viewProfileButton
+        );
+        row.appendChild(moreArea);
+
+
+        /* ---------- ADD ROW TO PAGE ---------- */
+
+        friendsList.appendChild(row);
+
+    });
 }
 
 
@@ -252,27 +569,22 @@ async function searchPlayer() {
         return;
     }
 
-    const {data, error} =
-        await supabaseClient
-            .from("profiles")
-            .select(`
-                display_name,
-                player_uid,
-                avatar_id
-            `)
-            .eq("player_uid", playerUID)
-            .maybeSingle();
+
+    const { data, error } =
+        await supabaseClient.rpc(
+            "get_public_player_profile",
+            {
+                p_player_uid: playerUID
+            }
+        );
+
 
     if (error) {
+
         console.error(
             "Failed to search player:",
             error
         );
-
-        return;
-    }
-
-    if (data === null) {
 
         searchResult.innerHTML = `
             <div class="friends-empty">
@@ -284,7 +596,23 @@ async function searchPlayer() {
         return;
     }
 
-    displaySearchResult(data);
+
+    if (!data || data.length === 0) {
+
+        searchResult.innerHTML = `
+            <div class="friends-empty">
+                <h3>Player not found</h3>
+                <p>Check the Player UID and try again.</p>
+            </div>
+        `;
+
+        return;
+    }
+
+
+    displaySearchResult(
+        data[0]
+    );
 }
 
 
@@ -292,16 +620,25 @@ function displaySearchResult(player) {
 
     searchResult.innerHTML = "";
 
+
+    /* ---------- CARD ---------- */
+
     const card =
         document.createElement("div");
 
-    card.classList.add("search-result-card");
+    card.classList.add(
+        "search-result-card"
+    );
 
+
+    /* ---------- AVATAR ---------- */
 
     const avatar =
         document.createElement("img");
 
-    avatar.classList.add("friend-avatar");
+    avatar.classList.add(
+        "friend-avatar"
+    );
 
     avatar.src =
         `assets/avatars/${player.avatar_id}.webp`;
@@ -310,16 +647,22 @@ function displaySearchResult(player) {
         "Player Avatar";
 
 
+    /* ---------- DETAILS ---------- */
+
     const details =
         document.createElement("div");
 
-    details.classList.add("friend-details");
+    details.classList.add(
+        "friend-details"
+    );
 
 
     const name =
         document.createElement("span");
 
-    name.classList.add("friend-name");
+    name.classList.add(
+        "friend-name"
+    );
 
     name.textContent =
         player.display_name;
@@ -328,11 +671,19 @@ function displaySearchResult(player) {
     const uid =
         document.createElement("span");
 
-    uid.classList.add("friend-uid");
+    uid.classList.add(
+        "friend-uid"
+    );
 
     uid.textContent =
         `UID ${player.player_uid}`;
 
+
+    details.appendChild(name);
+    details.appendChild(uid);
+
+
+    /* ---------- ACTION AREA ---------- */
 
     const actions =
         document.createElement("div");
@@ -342,6 +693,8 @@ function displaySearchResult(player) {
     );
 
 
+    /* ---------- VIEW PROFILE ---------- */
+
     const viewProfileButton =
         document.createElement("button");
 
@@ -349,43 +702,250 @@ function displaySearchResult(player) {
         "view-profile-button"
     );
 
+    viewProfileButton.type =
+        "button";
+
     viewProfileButton.textContent =
         "View Profile";
 
 
-    const addFriendButton =
-        document.createElement("button");
+    /* ---------- PROFILE EVENTS ---------- */
 
-    addFriendButton.classList.add(
-        "add-friend-button"
-    );
-
-    addFriendButton.textContent =
-        "Add Friend";
-
-    addFriendButton.addEventListener(
+    avatar.addEventListener(
         "click",
         function () {
 
-            sendFriendRequest(
-                player.player_uid,
-                addFriendButton
+            openPlayerProfile(
+                player.player_uid
             );
 
         }
     );
 
 
-    details.appendChild(name);
-    details.appendChild(uid);
+    details.addEventListener(
+        "click",
+        function () {
+
+            openPlayerProfile(
+                player.player_uid
+            );
+
+        }
+    );
+
+
+    viewProfileButton.addEventListener(
+        "click",
+        function () {
+
+            openPlayerProfile(
+                player.player_uid
+            );
+
+        }
+    );
+
 
     actions.appendChild(
         viewProfileButton
     );
 
-    actions.appendChild(
-        addFriendButton
-    );
+
+    /* ==================================================
+       RELATIONSHIP ACTION
+    ================================================== */
+
+
+    /* ---------- YOURSELF ---------- */
+
+    if (player.relationship === "self") {
+
+        const selfButton =
+            document.createElement("button");
+
+        selfButton.classList.add(
+            "add-friend-button"
+        );
+
+        selfButton.textContent =
+            "You";
+
+        selfButton.disabled = true;
+
+        actions.appendChild(
+            selfButton
+        );
+
+    }
+
+
+    /* ---------- ALREADY FRIENDS ---------- */
+
+    else if (
+        player.relationship === "friends"
+    ) {
+
+        const friendsButton =
+            document.createElement("button");
+
+        friendsButton.classList.add(
+            "add-friend-button"
+        );
+
+        friendsButton.textContent =
+            "Friends ✓";
+
+        friendsButton.disabled = true;
+
+        actions.appendChild(
+            friendsButton
+        );
+
+    }
+
+
+    /* ---------- REQUEST SENT ---------- */
+
+    else if (
+        player.relationship ===
+        "outgoing_request"
+    ) {
+
+        const requestSentButton =
+            document.createElement("button");
+
+        requestSentButton.classList.add(
+            "add-friend-button"
+        );
+
+        requestSentButton.textContent =
+            "Request Sent";
+
+        requestSentButton.disabled = true;
+
+        actions.appendChild(
+            requestSentButton
+        );
+
+    }
+
+
+    /* ---------- INCOMING REQUEST ---------- */
+
+    else if (
+        player.relationship ===
+        "incoming_request"
+    ) {
+
+        const declineButton =
+            document.createElement("button");
+
+        declineButton.classList.add(
+            "decline-request-button"
+        );
+
+        declineButton.type =
+            "button";
+
+        declineButton.textContent =
+            "Decline";
+
+
+        const acceptButton =
+            document.createElement("button");
+
+        acceptButton.classList.add(
+            "accept-request-button"
+        );
+
+        acceptButton.type =
+            "button";
+
+        acceptButton.textContent =
+            "Accept";
+
+
+        declineButton.addEventListener(
+            "click",
+            async function () {
+
+                await declineFriendRequest(
+                    player.request_id
+                );
+
+                await searchPlayer();
+
+            }
+        );
+
+
+        acceptButton.addEventListener(
+            "click",
+            async function () {
+
+                await acceptFriendRequest(
+                    player.request_id
+                );
+
+                await searchPlayer();
+
+            }
+        );
+
+
+        actions.appendChild(
+            declineButton
+        );
+
+        actions.appendChild(
+            acceptButton
+        );
+
+    }
+
+
+    /* ---------- NOT FRIENDS ---------- */
+
+    else if (
+        player.relationship === "none"
+    ) {
+
+        const addFriendButton =
+            document.createElement("button");
+
+        addFriendButton.classList.add(
+            "add-friend-button"
+        );
+
+        addFriendButton.type =
+            "button";
+
+        addFriendButton.textContent =
+            "Add Friend";
+
+
+        addFriendButton.addEventListener(
+            "click",
+            async function () {
+
+                await sendFriendRequest(
+                    player.player_uid,
+                    addFriendButton
+                );
+
+            }
+        );
+
+
+        actions.appendChild(
+            addFriendButton
+        );
+
+    }
+
+
+    /* ---------- BUILD CARD ---------- */
 
     card.appendChild(avatar);
     card.appendChild(details);
@@ -404,7 +964,7 @@ async function sendFriendRequest(
     button
 ) {
 
-    const { error } =
+    const {error} =
         await supabaseClient.rpc(
             "send_friend_request",
             {
@@ -428,24 +988,400 @@ async function sendFriendRequest(
     button.disabled = true;
 }
 
-
 /* ==================================================
    FRIEND REQUESTS
 ================================================== */
 
 async function loadFriendRequests() {
 
-    // Load incoming requests for currentUser.
+    const {data, error} =
+        await supabaseClient.rpc(
+            "get_incoming_friend_requests"
+        );
 
+    if (error) {
+
+        console.error(
+            "Failed to load friend requests:",
+            error
+        );
+
+        return;
+    }
+
+    displayFriendRequests(data);
+    updateFriendsNotification(data.length);
 }
-
 
 function displayFriendRequests(requests) {
 
-    // Build incoming request rows.
+    // Clear whatever was previously displayed
+    requestsList.innerHTML = "";
 
+    // If there are no requests
+    if (requests.length === 0) {
+
+        requestsList.innerHTML = `
+            <div class="friends-empty">
+                <h3>No Friend Requests</h3>
+                <p>You don't have any incoming friend requests.</p>
+            </div>
+        `;
+
+        return;
+    }
+
+
+    // Build one row for each request
+    requests.forEach(function (request) {
+
+        const row =
+            document.createElement("div");
+
+        row.classList.add("request-row");
+
+        const avatar =
+            document.createElement("img");
+
+        avatar.classList.add("friend-avatar");
+
+        avatar.src =
+            `assets/avatars/${request.avatar_id}.webp`;
+
+        avatar.alt =
+            "Player Avatar";
+
+        const details =
+            document.createElement("div");
+
+        details.classList.add("friend-details");
+
+        const name =
+            document.createElement("span");
+
+        name.classList.add("friend-name");
+
+        name.textContent =
+            request.display_name;
+
+
+        const uid =
+            document.createElement("span");
+
+        uid.classList.add("friend-uid");
+
+        uid.textContent =
+            `UID ${request.player_uid}`;
+
+        details.appendChild(name);
+        details.appendChild(uid);
+
+        avatar.addEventListener("click", function () {
+            openPlayerProfile(request.player_uid);
+        });
+
+        details.addEventListener("click", function () {
+            openPlayerProfile(request.player_uid);
+        });
+
+        const actions =
+            document.createElement("div");
+
+        actions.classList.add("request-actions");
+
+
+        const acceptButton =
+            document.createElement("button");
+
+        acceptButton.classList.add(
+            "accept-request-button"
+        );
+
+        acceptButton.textContent =
+            "Accept";
+
+
+        const declineButton =
+            document.createElement("button");
+
+        declineButton.classList.add(
+            "decline-request-button"
+        );
+
+        declineButton.textContent =
+            "Decline";
+
+        acceptButton.addEventListener("click", function () {
+
+            acceptFriendRequest(
+                request.request_id
+            );
+
+        });
+
+
+        declineButton.addEventListener("click", function () {
+
+            declineFriendRequest(
+                request.request_id
+            );
+
+        });
+
+        actions.appendChild(acceptButton);
+        actions.appendChild(declineButton);
+
+        row.appendChild(avatar);
+        row.appendChild(details);
+        row.appendChild(actions);
+
+        requestsList.appendChild(row);
+
+    });
 }
 
+async function openPlayerProfile(playerUID) {
+
+    const {data, error} =
+        await supabaseClient.rpc(
+            "get_public_player_profile",
+            {
+                p_player_uid: playerUID
+            }
+        );
+
+    if (error) {
+
+        console.error(
+            "Failed to load player profile:",
+            error
+        );
+
+        return;
+    }
+
+    if (!data || data.length === 0) {
+        return;
+    }
+
+    const player = data[0];
+
+
+    /* ---------- Profile Information ---------- */
+
+    publicProfileBanner.src =
+        `assets/banners/${player.banner_id}.webp`;
+
+    publicProfileAvatar.src =
+        `assets/avatars/${player.avatar_id}.webp`;
+
+    publicProfileName.textContent =
+        player.display_name;
+
+    publicProfileUID.textContent =
+        `UID ${player.player_uid}`;
+
+    publicProfileBio.textContent =
+        player.bio || "No bio set.";
+
+
+    /* ---------- Statistics ---------- */
+
+    publicStatAccuracy.textContent =
+        player.accuracy === null
+            ? "—"
+            : `${player.accuracy}%`;
+
+    publicStatStreak.textContent =
+        player.current_streak === null
+            ? "—"
+            : player.current_streak;
+
+    publicStatSurvival.textContent =
+        player.best_survival === null
+            ? "—"
+            : player.best_survival;
+
+
+    /* ---------- Relationship ---------- */
+
+    displayProfileActions(player);
+
+
+    /* ---------- Open Modal ---------- */
+
+    playerProfileModal.classList.remove(
+        "hidden"
+    );
+}
+
+function displayProfileActions(player) {
+
+    publicProfileActions.innerHTML = "";
+
+
+    /* ---------- Your Own Profile ---------- */
+
+    if (player.relationship === "self") {
+        return;
+    }
+
+
+    /* ---------- Already Friends ---------- */
+
+    if (player.relationship === "friends") {
+
+        const button =
+            document.createElement("button");
+
+        button.classList.add(
+            "public-profile-secondary-action"
+        );
+
+        button.textContent =
+            "Friends ✓";
+
+        button.disabled = true;
+
+        publicProfileActions.appendChild(
+            button
+        );
+
+        return;
+    }
+
+
+    /* ---------- Request Already Sent ---------- */
+
+    if (
+        player.relationship ===
+        "outgoing_request"
+    ) {
+
+        const button =
+            document.createElement("button");
+
+        button.classList.add(
+            "public-profile-secondary-action"
+        );
+
+        button.textContent =
+            "Request Sent";
+
+        button.disabled = true;
+
+        publicProfileActions.appendChild(
+            button
+        );
+
+        return;
+    }
+
+
+    /* ---------- They Sent You A Request ---------- */
+
+    if (
+        player.relationship ===
+        "incoming_request"
+    ) {
+
+        const declineButton =
+            document.createElement("button");
+
+        declineButton.classList.add(
+            "public-profile-secondary-action"
+        );
+
+        declineButton.textContent =
+            "Decline";
+
+
+        const acceptButton =
+            document.createElement("button");
+
+        acceptButton.classList.add(
+            "public-profile-primary-action"
+        );
+
+        acceptButton.textContent =
+            "Accept";
+
+
+        declineButton.addEventListener(
+            "click",
+            async function () {
+
+                await declineFriendRequest(
+                    player.request_id
+                );
+
+                playerProfileModal.classList.add(
+                    "hidden"
+                );
+            }
+        );
+
+
+        acceptButton.addEventListener(
+            "click",
+            async function () {
+
+                await acceptFriendRequest(
+                    player.request_id
+                );
+
+                playerProfileModal.classList.add(
+                    "hidden"
+                );
+            }
+        );
+
+
+        publicProfileActions.appendChild(
+            declineButton
+        );
+
+        publicProfileActions.appendChild(
+            acceptButton
+        );
+
+        return;
+    }
+
+
+    /* ---------- Not Friends ---------- */
+
+    if (player.relationship === "none") {
+
+        const addButton =
+            document.createElement("button");
+
+        addButton.classList.add(
+            "public-profile-primary-action"
+        );
+
+        addButton.textContent =
+            "Add Friend";
+
+
+        addButton.addEventListener(
+            "click",
+            async function () {
+
+                await sendFriendRequest(
+                    player.player_uid,
+                    addButton
+                );
+
+            }
+        );
+
+
+        publicProfileActions.appendChild(
+            addButton
+        );
+    }
+}
 
 /* ==================================================
    ACCEPT FRIEND REQUEST
@@ -453,13 +1389,26 @@ function displayFriendRequests(requests) {
 
 async function acceptFriendRequest(requestID) {
 
-    // We'll call:
-    //
-    // supabaseClient.rpc(
-    //     "accept_friend_request",
-    //     { p_request_id: requestID }
-    // );
+    const {error} =
+        await supabaseClient.rpc(
+            "accept_friend_request",
+            {
+                p_request_id: requestID
+            }
+        );
 
+    if (error) {
+
+        console.error(
+            "Failed to accept friend request:",
+            error
+        );
+
+        return;
+    }
+
+    await loadFriendRequests();
+    await loadFriends();
 }
 
 
@@ -469,13 +1418,25 @@ async function acceptFriendRequest(requestID) {
 
 async function declineFriendRequest(requestID) {
 
-    // We'll call:
-    //
-    // supabaseClient.rpc(
-    //     "decline_friend_request",
-    //     { p_request_id: requestID }
-    // );
+    const {error} =
+        await supabaseClient.rpc(
+            "decline_friend_request",
+            {
+                p_request_id: requestID
+            }
+        );
 
+    if (error) {
+
+        console.error(
+            "Failed to decline friend request:",
+            error
+        );
+
+        return;
+    }
+
+    await loadFriendRequests();
 }
 
 
@@ -506,6 +1467,60 @@ function updateFriendsNotification(count) {
     requestCount.classList.remove("hidden");
 }
 
+
+/* ==================================================
+   FRIEND REMOVAL
+================================================== */
+
+function openRemoveFriendConfirmation(friend) {
+
+    friendPendingRemoval = friend;
+
+    removeFriendMessage.textContent =
+        `Are you sure you want to remove ${friend.display_name} from your friends?`;
+
+    removeFriendModal.classList.remove(
+        "hidden"
+    );
+}
+
+function closeAllFriendMenus() {
+
+    const menus =
+        document.querySelectorAll(
+            ".friend-more-menu"
+        );
+
+    menus.forEach(function (menu) {
+        menu.classList.add("hidden");
+    });
+}
+
+async function removeFriend(playerUID) {
+
+    const {error} =
+        await supabaseClient.rpc(
+            "remove_friend",
+            {
+                p_player_uid: playerUID
+            }
+        );
+
+    if (error) {
+
+        console.error(
+            "Failed to remove friend:",
+            error
+        );
+
+        return false;
+    }
+
+
+    await loadFriends();
+
+    return true;
+}
 
 /* ==================================================
    PROFILE DROPDOWN
@@ -638,6 +1653,113 @@ friendsButton.addEventListener(
     }
 );
 
+/* ==================================================
+   PUBLIC PROFILE MODAL LISTENERS
+================================================== */
+
+closePlayerProfileButton.addEventListener(
+    "click",
+    function () {
+
+        playerProfileModal.classList.add(
+            "hidden"
+        );
+
+    }
+);
+
+
+playerProfileModal.addEventListener(
+    "click",
+    function (event) {
+
+        if (event.target === playerProfileModal) {
+
+            playerProfileModal.classList.add(
+                "hidden"
+            );
+
+        }
+
+    }
+);
+
+/* ==================================================
+   FRIEND REMOVAL LISTENERS
+================================================== */
+cancelRemoveFriendButton.addEventListener(
+    "click",
+    function () {
+
+        removeFriendModal.classList.add(
+            "hidden"
+        );
+
+        friendPendingRemoval = null;
+
+    }
+);
+
+document.addEventListener(
+    "click",
+    function (event) {
+
+        if (
+            !event.target.closest(
+                ".friend-more-area"
+            )
+        ) {
+            closeAllFriendMenus();
+        }
+
+    }
+);
+
+confirmRemoveFriendButton.addEventListener(
+    "click",
+    async function () {
+
+        if (friendPendingRemoval === null) {
+            return;
+        }
+
+
+        const success =
+            await removeFriend(
+                friendPendingRemoval.player_uid
+            );
+
+
+        if (!success) {
+            return;
+        }
+
+
+        removeFriendModal.classList.add(
+            "hidden"
+        );
+
+        friendPendingRemoval = null;
+
+    }
+);
+
+removeFriendModal.addEventListener(
+    "click",
+    function (event) {
+
+        if (event.target === removeFriendModal) {
+
+            removeFriendModal.classList.add(
+                "hidden"
+            );
+
+            friendPendingRemoval = null;
+
+        }
+
+    }
+);
 
 /* ==================================================
    TUTORIAL
@@ -661,6 +1783,7 @@ backHomeButton.addEventListener(
         window.location.href = "home.html";
     }
 );
+
 
 /* ==================================================
    INITIALIZE PAGE

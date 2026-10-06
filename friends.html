@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
 
     <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
     >
 
     <title>Friends | Project Ichiko</title>
@@ -54,9 +54,9 @@
 
         <!-- Friends Button -->
         <button
-            id="friends-button"
-            class="friends-button"
-            aria-label="Friends"
+                id="friends-button"
+                class="friends-button"
+                aria-label="Friends"
         >
 
             <span class="friends-icon">
@@ -64,8 +64,8 @@
             </span>
 
             <span
-                id="friends-notification"
-                class="friends-notification hidden"
+                    id="friends-notification"
+                    class="friends-notification hidden"
             >
                 0
             </span>
@@ -75,14 +75,14 @@
 
         <!-- Profile Button -->
         <button
-            id="profile-button"
-            class="profile-button"
+                id="profile-button"
+                class="profile-button"
         >
 
             <img
-                id="profile-picture"
-                src="assets/avatars/default.webp"
-                alt="Profile Picture"
+                    id="profile-picture"
+                    src="assets/avatars/default.webp"
+                    alt="Profile Picture"
             >
 
             <span id="display-name">
@@ -98,8 +98,8 @@
 
         <!-- Profile Dropdown -->
         <div
-            id="profile-dropdown"
-            class="profile-dropdown hidden"
+                id="profile-dropdown"
+                class="profile-dropdown hidden"
         >
 
             <a href="profile.html">
@@ -121,23 +121,22 @@
 </header>
 
 
-
 <!-- ==================================================
      FRIENDS PAGE
 ================================================== -->
 
 <main
-    id="friends-page"
-    class="friends-page"
+        id="friends-page"
+        class="friends-page"
 >
-  <!-- Back to Home -->
-<button
-    id="back-home-button"
-    class="back-home-button"
-    type="button"
->
-    ← Back
-</button>
+    <!-- Back to Home -->
+    <button
+            id="back-home-button"
+            class="back-home-button"
+            type="button"
+    >
+        ← Back
+    </button>
 
 
     <!-- ==================================================
@@ -145,8 +144,8 @@
     ================================================== -->
 
     <section
-        id="friends-heading"
-        class="friends-heading"
+            id="friends-heading"
+            class="friends-heading"
     >
 
         <h1>FRIENDS</h1>
@@ -158,22 +157,21 @@
     </section>
 
 
-
     <!-- ==================================================
          FRIENDS NAVIGATION
     ================================================== -->
 
     <nav
-        id="friends-navigation"
-        class="friends-tabs"
+            id="friends-navigation"
+            class="friends-tabs"
     >
 
 
         <!-- Friends Tab -->
         <button
-            id="friends-tab"
-            class="friends-tab active"
-            data-tab="friends"
+                id="friends-tab"
+                class="friends-tab active"
+                data-tab="friends"
         >
 
             <span>
@@ -181,21 +179,20 @@
             </span>
 
             <span
-                id="friend-count"
-                class="tab-count"
+                    id="friend-count"
+                    class="tab-count"
             >
-                3
+                0
             </span>
 
         </button>
 
 
-
         <!-- Search Tab -->
         <button
-            id="search-tab"
-            class="friends-tab"
-            data-tab="search"
+                id="search-tab"
+                class="friends-tab"
+                data-tab="search"
         >
 
             Search Player UID
@@ -203,12 +200,11 @@
         </button>
 
 
-
         <!-- Requests Tab -->
         <button
-            id="requests-tab"
-            class="friends-tab"
-            data-tab="requests"
+                id="requests-tab"
+                class="friends-tab"
+                data-tab="requests"
         >
 
             <span>
@@ -216,8 +212,8 @@
             </span>
 
             <span
-                id="request-count"
-                class="tab-notification"
+                    id="request-count"
+                    class="tab-notification"
             >
                 2
             </span>
@@ -228,344 +224,326 @@
     </nav>
 
 
-
     <!-- ==================================================
-         FRIENDS TAB
-    ================================================== -->
+     FRIENDS TAB
+================================================== -->
 
-    <section
+<section
         id="friends-panel"
         class="tab-panel"
-    >
+>
 
-
-        <div
+    <div
             id="friends-panel-heading"
             class="panel-heading"
-        >
-
-            <div>
-
-                <h2>
-                    Your Friends
-                </h2>
-
-                <p>
-                    Players you've added as friends.
-                </p>
-
-            </div>
-
-        </div>
-
-
-
-        <div
-            id="friends-list"
-            class="friends-list"
-        >
-
-
-            <!-- Temporary Friend -->
-
-            <div class="friend-row">
-
-                <img
-                    class="friend-avatar"
-                    src="assets/avatars/default.webp"
-                    alt="Player Avatar"
-                >
-
-
-                <div class="friend-details">
-
-                    <span class="friend-name">
-                        Ichika
-                    </span>
-
-                    <span class="friend-uid">
-                        UID 100018
-                    </span>
-
-                </div>
-
-
-                <button class="view-profile-button">
-                    View Profile
-                </button>
-
-            </div>
-
-
-
-            <!-- Temporary Friend -->
-
-            <div class="friend-row">
-
-                <img
-                    class="friend-avatar"
-                    src="assets/avatars/default.webp"
-                    alt="Player Avatar"
-                >
-
-
-                <div class="friend-details">
-
-                    <span class="friend-name">
-                        Ren
-                    </span>
-
-                    <span class="friend-uid">
-                        UID 100021
-                    </span>
-
-                </div>
-
-
-                <button class="view-profile-button">
-                    View Profile
-                </button>
-
-            </div>
-
-
-
-            <!-- Temporary Friend -->
-
-            <div class="friend-row">
-
-                <img
-                    class="friend-avatar"
-                    src="assets/avatars/default.webp"
-                    alt="Player Avatar"
-                >
-
-
-                <div class="friend-details">
-
-                    <span class="friend-name">
-                        Sora
-                    </span>
-
-                    <span class="friend-uid">
-                        UID 100031
-                    </span>
-
-                </div>
-
-
-                <button class="view-profile-button">
-                    View Profile
-                </button>
-
-            </div>
-
-
-        </div>
-
-    </section>
-
-
-
-    <!-- ==================================================
-         SEARCH PLAYER TAB
-    ================================================== -->
-
-    <section
-        id="search-panel"
-        class="tab-panel hidden"
     >
 
+        <div>
 
-        <div
-            id="search-panel-heading"
-            class="panel-heading"
-        >
+            <h2>
+                Your Friends
+            </h2>
 
-            <div>
-
-                <h2>
-                    Search Player
-                </h2>
-
-                <p>
-                    Find another player using their Player UID.
-                </p>
-
-            </div>
+            <p>
+                Players you've added as friends.
+            </p>
 
         </div>
 
+    </div>
 
 
-        <!-- Tutorial can highlight this entire area -->
-        <div
+    <div
+            id="friends-list"
+            class="friends-list"
+    >
+        <!-- JS inserts friends here -->
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     SEARCH PLAYER TAB
+================================================== -->
+
+<section
+        id="search-panel"
+        class="tab-panel hidden"
+>
+
+    <div
+            id="search-panel-heading"
+            class="panel-heading"
+    >
+
+        <div>
+
+            <h2>
+                Search Player
+            </h2>
+
+            <p>
+                Find another player using their Player UID.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div
             id="player-search-area"
             class="player-search"
-        >
+    >
 
-            <input
+        <input
                 id="player-uid-input"
                 type="number"
                 placeholder="Enter Player UID"
                 autocomplete="off"
-            >
+        >
 
-            <button
+        <button
                 id="search-player-button"
                 type="button"
-            >
-                Search
-            </button>
+        >
+            Search
+        </button>
 
-        </div>
-        <!-- Search Result Area -->
-<div
-    id="search-result"
-    class="search-result"
->
-</div>
-
-    </section>
+    </div>
 
 
+    <div
+            id="search-result"
+            class="search-result"
+    >
+        <!-- JS inserts search result here -->
+    </div>
 
-    <!-- ==================================================
-         FRIEND REQUESTS TAB
-    ================================================== -->
+</section>
 
-    <section
+
+<!-- ==================================================
+     FRIEND REQUESTS TAB
+================================================== -->
+
+<section
         id="requests-panel"
         class="tab-panel hidden"
-    >
+>
 
-
-        <div
+    <div
             id="requests-panel-heading"
             class="panel-heading"
-        >
+    >
 
-            <div>
+        <div>
 
-                <h2>
-                    Friend Requests
-                </h2>
+            <h2>
+                Friend Requests
+            </h2>
 
-                <p>
-                    Players who want to add you as a friend.
-                </p>
-
-            </div>
+            <p>
+                Players who want to add you as a friend.
+            </p>
 
         </div>
 
+    </div>
 
 
-        <!-- Tutorial can highlight the whole request area -->
-        <div
+    <div
             id="requests-list"
             class="requests-list"
-        >
+    >
+        <!-- JS inserts friend requests here -->
+    </div>
 
-
-            <!-- Temporary Request -->
-
-            <div class="request-row">
-
-                <img
-                    class="friend-avatar"
-                    src="assets/avatars/default.webp"
-                    alt="Player Avatar"
-                >
-
-
-                <div class="friend-details">
-
-                    <span class="friend-name">
-                        Yuki
-                    </span>
-
-                    <span class="friend-uid">
-                        UID 100027
-                    </span>
-
-                </div>
-
-
-                <div class="request-actions">
-
-                    <button
-                        class="accept-request-button"
-                        type="button"
-                    >
-                        Accept
-                    </button>
-
-                    <button
-                        class="decline-request-button"
-                        type="button"
-                    >
-                        Decline
-                    </button>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- Temporary Request -->
-
-            <div class="request-row">
-
-                <img
-                    class="friend-avatar"
-                    src="assets/avatars/default.webp"
-                    alt="Player Avatar"
-                >
-
-
-                <div class="friend-details">
-
-                    <span class="friend-name">
-                        Haru
-                    </span>
-
-                    <span class="friend-uid">
-                        UID 100042
-                    </span>
-
-                </div>
-
-
-                <div class="request-actions">
-
-                    <button
-                        class="accept-request-button"
-                        type="button"
-                    >
-                        Accept
-                    </button>
-
-                    <button
-                        class="decline-request-button"
-                        type="button"
-                    >
-                        Decline
-                    </button>
-
-                </div>
-
-            </div>
-
-
-        </div>
-
-    </section>
+</section>
 
 
 </main>
 
+<!-- ==================================================
+     PUBLIC PLAYER PROFILE MODAL
+================================================== -->
+
+<div
+    id="player-profile-modal"
+    class="profile-modal-overlay hidden"
+>
+    <div
+        id="public-profile-card"
+        class="public-profile-card"
+    >
+
+        <!-- Close -->
+        <button
+            id="close-player-profile"
+            class="profile-modal-close"
+            type="button"
+            aria-label="Close profile"
+        >
+            ×
+        </button>
+
+
+        <!-- Banner -->
+        <div class="public-profile-banner">
+
+            <img
+                id="public-profile-banner-image"
+                src="assets/banners/default.webp"
+                alt="Player Banner"
+            >
+
+        </div>
+
+
+        <!-- Identity -->
+        <div class="public-profile-identity">
+
+            <img
+                id="public-profile-avatar"
+                class="public-profile-avatar"
+                src="assets/avatars/default.webp"
+                alt="Player Avatar"
+            >
+
+            <div class="public-profile-name-area">
+
+                <h2 id="public-profile-name">
+                    Player
+                </h2>
+
+                <span id="public-profile-uid">
+                    UID ------
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Bio -->
+        <div class="public-profile-bio">
+
+            <p id="public-profile-bio-text">
+                No bio set.
+            </p>
+
+        </div>
+
+
+        <!-- Statistics -->
+        <div class="public-profile-section">
+
+            <h3>STATISTICS</h3>
+
+            <div class="public-profile-stats">
+
+                <div class="public-stat">
+
+                    <span
+                        id="public-stat-accuracy"
+                        class="public-stat-value"
+                    >
+                        —
+                    </span>
+
+                    <span class="public-stat-label">
+                        Accuracy
+                    </span>
+
+                </div>
+
+
+                <div class="public-stat">
+
+                    <span
+                        id="public-stat-streak"
+                        class="public-stat-value"
+                    >
+                        —
+                    </span>
+
+                    <span class="public-stat-label">
+                        Day Streak
+                    </span>
+
+                </div>
+
+
+                <div class="public-stat">
+
+                    <span
+                        id="public-stat-survival"
+                        class="public-stat-value"
+                    >
+                        —
+                    </span>
+
+                    <span class="public-stat-label">
+                        Best Survival
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Relationship Actions -->
+        <div
+            id="public-profile-actions"
+            class="public-profile-actions"
+        >
+            <!-- JS inserts relationship buttons here -->
+        </div>
+
+    </div>
+</div>
+
+<!-- ==================================================
+     REMOVE FRIEND CONFIRMATION
+================================================== -->
+
+<div
+    id="remove-friend-modal"
+    class="confirm-modal-overlay hidden"
+>
+    <div class="confirm-modal">
+
+        <h2>Remove Friend?</h2>
+
+        <p id="remove-friend-message">
+            Are you sure you want to remove this player?
+        </p>
+
+        <div class="confirm-modal-actions">
+
+            <button
+                id="cancel-remove-friend"
+                class="confirm-cancel-button"
+                type="button"
+            >
+                Cancel
+            </button>
+
+            <button
+                id="confirm-remove-friend"
+                class="confirm-remove-button"
+                type="button"
+            >
+                Remove Friend
+            </button>
+
+        </div>
+
+    </div>
+</div>
 
 <!-- ==================================================
      SCRIPTS
