@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Survival | Project Ichiko</title>
+
+    <link rel="stylesheet" href="css/survival.css">
+</head>
+
+
+<body>
+
+    <main class="survival-page">
+
+
+        <!-- ==================================================
+             PRE-START SCREEN
+             ================================================== -->
+
+        <section id="survival-start-screen">
+
+
+            <button
+                id="back-home-button"
+                class="back-button"
+                type="button"
+            >
+                <span class="back-arrow">‹</span>
+                <span>Back</span>
+            </button>
+
+
+            <div
+                class="top-ornament"
+                aria-hidden="true"
+            >
+                <span></span>
+                <i>◆</i>
+                <span></span>
+            </div>
+
+
+            <header class="trial-hero">
+
+                <p class="mode-name">
+                    SURVIVAL
+                </p>
+
+
+                <div
+                    class="trial-crest"
+                    aria-hidden="true"
+                >
+
+                    <div
+                        class="crest-ring crest-ring-outer"
+                    ></div>
+
+                    <div
+                        class="crest-ring crest-ring-inner"
+                    ></div>
+
+                    <div class="crest-diamond">
+                        <span>✦</span>
+                    </div>
+
+                </div>
+
+
+                <p class="trial-number">
+                    TRIAL I
+                </p>
+
+
+                <h1 id="survival-test-title">
+                    Trial TEST
+                </h1>
+
+                <div
+                        class="title-divider"
+                        aria-hidden="true"
+                >
+                    <span></span>
+                    <i>◇</i>
+                    <span></span>
+                </div>
+
+                <p
+                        id="survival-test-description"
+                        class="trial-description"
+                >
+                    Face a timed examination and test your knowledge
+                    under true exam conditions.
+                </p>
+            </header>
+
+
+            <!-- Trial info -->
+
+            <section
+                class="trial-overview"
+                aria-label="Trial information"
+            >
+
+                <div class="overview-item">
+
+                    <span
+                        class="overview-symbol"
+                        aria-hidden="true"
+                    >
+                        ✦
+                    </span>
+
+                    <div>
+                        <strong id="survival-question-count">30</strong>
+                        <span>Questions</span>
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="overview-divider"
+                    aria-hidden="true"
+                ></div>
+
+
+                <div class="overview-item">
+
+                    <span
+                        class="overview-symbol"
+                        aria-hidden="true"
+                    >
+                        ◷
+                    </span>
+
+                    <div>
+                        <strong id="survival-time-limit">30:00</strong>
+                        <span>Time Limit</span>
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="overview-divider"
+                    aria-hidden="true"
+                ></div>
+
+
+                <div class="overview-item">
+
+                    <span
+                        class="overview-symbol"
+                        aria-hidden="true"
+                    >
+                        ◆
+                    </span>
+
+                    <div>
+                        <strong>Mixed</strong>
+                        <span>Difficulty</span>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- Details -->
+
+            <section class="trial-details">
+
+
+                <!-- Conditions -->
+
+                <div class="detail-column">
+
+                    <div class="section-heading">
+
+                        <span></span>
+
+                        <h2>
+                            Trial Conditions
+                        </h2>
+
+                        <span></span>
+
+                    </div>
+
+
+                    <div class="condition-list">
+
+
+                        <div class="condition">
+
+                            <div
+                                class="condition-icon"
+                                aria-hidden="true"
+                            >
+                                ⚑
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Mark for Review
+                                </h3>
+
+                                <p>
+                                    Flag uncertain questions and
+                                    return to them later.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="condition">
+
+                            <div
+                                class="condition-icon"
+                                aria-hidden="true"
+                            >
+                                ↔
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Free Navigation
+                                </h3>
+
+                                <p>
+                                    Move freely between all questions
+                                    before submitting.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="condition">
+
+                            <div
+                                class="condition-icon"
+                                aria-hidden="true"
+                            >
+                                ◷
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Automatic End
+                                </h3>
+
+                                <p>
+                                    The challenge submits automatically
+                                    when time expires.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Preparation -->
+
+                <div
+                    class="detail-column preparation-column"
+                >
+
+                    <div class="section-heading">
+
+                        <span></span>
+
+                        <h2>
+                            Preparation
+                        </h2>
+
+                        <span></span>
+
+                    </div>
+
+
+                    <p class="preparation-intro">
+                        The following materials may be used
+                        during this challenge.
+                    </p>
+
+
+                    <div
+                            id="survival-materials"
+                            class="permitted-list"
+                    ></div>
+
+                </div>
+
+            </section>
+
+
+            <!-- Warning -->
+
+            <section class="trial-warning">
+
+                <strong>
+                    Time Cannot Be Paused
+                </strong>
+
+                <p>
+                    Once the challenge begins, the clock continues
+                    even if you leave this page.
+                </p>
+
+            </section>
+
+
+            <!-- Start -->
+
+            <div class="trial-entry">
+
+                <button
+                    id="start-test-button"
+                    class="begin-trial-button"
+                    type="button"
+                >
+
+                    <span class="button-decoration">
+                        ◇
+                    </span>
+
+                    <span class="button-text">
+                        Start Challenge
+                    </span>
+
+                    <span class="button-decoration">
+                        ◇
+                    </span>
+
+                </button>
+
+            </div>
+
+
+            <div
+                class="bottom-ornament"
+                aria-hidden="true"
+            >
+
+                <span></span>
+                <i>✦</i>
+                <span></span>
+
+            </div>
+
+        </section>
+
+        <!-- ==================================================
+     RECENT SURVIVAL RECORDS
+     ================================================== -->
+
+        <section
+                id="recent-survival-section"
+                class="recent-survival-section"
+        >
+
+            <div class="records-heading">
+
+                <span></span>
+
+                <div>
+                    <p>SURVIVAL HISTORY</p>
+                    <h2>Recent Records</h2>
+                </div>
+
+                <span></span>
+
+            </div>
+
+
+            <p class="records-description">
+                Review your three most recent Survival attempts.
+            </p>
+
+
+            <div
+                    id="recent-survival-list"
+                    class="recent-survival-list"
+            >
+                <!-- Generated by survival.js -->
+            </div>
+
+        </section>
+
+
+
+        <!-- ==================================================
+             ACTIVE SURVIVAL TEST
+             Hidden until Start Challenge is pressed
+             ================================================== -->
+
+        <section
+            id="survival-test-screen"
+            class="survival-test-screen hidden"
+        >
+
+
+            <!-- ==========================
+                 TEST TOP BAR
+                 ========================== -->
+
+            <header class="test-topbar">
+
+                <div class="test-mode-info">
+
+                    <span class="test-mode-label">
+                        SURVIVAL
+                    </span>
+
+                    <strong>
+                        Trial I
+                    </strong>
+
+                </div>
+
+
+                <div class="test-progress">
+
+                    <span id="question-progress">
+                        Question 1 / 30
+                    </span>
+
+                </div>
+
+
+                <div class="timer-box">
+
+                    <span class="timer-label">
+                        TIME
+                    </span>
+
+                    <strong id="survival-timer">
+                        30:00
+                    </strong>
+
+                </div>
+
+            </header>
+
+
+
+            <!-- ==========================
+                 TEST LAYOUT
+                 ========================== -->
+
+            <div class="test-layout">
+
+
+                <!-- ======================
+                     QUESTION AREA
+                     ====================== -->
+
+                <section class="question-area">
+
+
+                    <div class="question-heading">
+
+                        <div>
+
+                            <span
+                                id="question-number"
+                                class="question-number"
+                            >
+                                QUESTION 01
+                            </span>
+
+                            <span
+                                id="question-subject"
+                                class="question-subject"
+                            >
+                                General
+                            </span>
+
+                        </div>
+
+
+                        <button
+                            id="flag-question-button"
+                            class="flag-question-button"
+                            type="button"
+                        >
+                            <span>⚑</span>
+                            <span>Flag</span>
+                        </button>
+
+                    </div>
+
+                    <!-- ======================================================
+                         SHARED QUESTION MATERIAL
+                         Passage / map / chart / source material
+                    ======================================================= -->
+
+                    <section
+                            id="question-material"
+                            class="question-material hidden"
+                    >
+                        <div
+                                id="material-passage-pane"
+                                class="material-passage-pane hidden"
+                        >
+                            <div class="material-heading">
+            <span id="material-title">
+                Source Material
+            </span>
+                            </div>
+
+                            <div
+                                    id="material-passage-text"
+                                    class="material-passage-text"
+                            ></div>
+                        </div>
+
+                        <div
+                                id="material-image-pane"
+                                class="material-image-pane hidden"
+                        >
+                            <img
+                                    id="material-image"
+                                    class="material-image"
+                                    alt=""
+                            >
+                        </div>
+                    </section>
+
+                    <!-- Question -->
+
+                    <div class="question-content">
+
+                        <p
+                                id="question-text"
+                                class="question-text"
+                        >
+                            Question will appear here.
+                        </p>
+
+
+                        <!-- Question-specific image -->
+
+                        <div
+                                id="question-image-container"
+                                class="question-image-container hidden"
+                        >
+                            <img
+                                    id="question-image"
+                                    class="question-image"
+                                    alt=""
+                            >
+                        </div>
+
+                    </div>
+
+
+                    <!-- Answers generated by JS -->
+
+                    <div
+                        id="answer-options"
+                        class="answer-options"
+                    ></div>
+
+                    <div
+                            id="review-explanation"
+                            class="review-explanation hidden"
+                    >
+
+    <span>
+        Explanation
+    </span>
+
+                        <p id="review-explanation-text"></p>
+
+                    </div>
+
+
+
+                    <!-- Navigation -->
+
+                    <div class="question-navigation">
+
+                        <button
+                            id="previous-question-button"
+                            class="question-nav-button secondary"
+                            type="button"
+                        >
+                            ‹ Previous
+                        </button>
+
+
+                        <button
+                            id="next-question-button"
+                            class="question-nav-button primary"
+                            type="button"
+                        >
+                            Next ›
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- ======================
+                     QUESTION NAVIGATOR
+                     Desktop / Chromebook
+                     ====================== -->
+
+                <aside
+                    id="question-navigator"
+                    class="question-navigator"
+                >
+
+                    <div class="navigator-heading">
+
+                        <div>
+
+                            <span>
+                                QUESTIONS
+                            </span>
+
+                            <strong id="answered-count">
+                                0 / 30 answered
+                            </strong>
+
+                        </div>
+
+
+                        <button
+                            id="close-navigator-button"
+                            class="close-navigator-button"
+                            type="button"
+                        >
+                            ×
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="question-grid"
+                        class="question-grid"
+                    ></div>
+
+                    <button
+                            id="navigator-submit-button"
+                            class="navigator-submit-button"
+                            type="button"
+                    >
+                        Submit Challenge
+                    </button>
+
+                    <div class="navigator-legend">
+
+                        <div>
+                            <span class="legend-box answered"></span>
+                            Answered
+                        </div>
+
+                        <div>
+                            <span class="legend-box flagged"></span>
+                            Flagged
+                        </div>
+
+                        <div>
+                            <span class="legend-box current"></span>
+                            Current
+                        </div>
+
+                    </div>
+
+                </aside>
+
+            </div>
+
+
+
+            <!-- Phone navigator button -->
+
+            <button
+                id="open-navigator-button"
+                class="open-navigator-button"
+                type="button"
+            >
+                Questions
+                <span id="mobile-question-progress">
+                    1 / 30
+                </span>
+            </button>
+
+
+            <!-- Mobile overlay -->
+
+            <div
+                id="navigator-overlay"
+                class="navigator-overlay"
+            ></div>
+
+
+        </section>
+
+        <!-- ==================================================
+     SUBMIT CONFIRMATION
+     ================================================== -->
+
+<div
+    id="submit-modal-overlay"
+    class="submit-modal-overlay hidden"
+>
+
+    <section
+        class="submit-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="submit-modal-title"
+    >
+
+        <div class="submit-modal-decoration">
+            <span></span>
+            <i>◇</i>
+            <span></span>
+        </div>
+
+
+        <p class="submit-modal-label">
+            SURVIVAL
+        </p>
+
+
+        <h2 id="submit-modal-title">
+            Finish Challenge?
+        </h2>
+
+
+        <p class="submit-modal-description">
+            Check your progress before submitting.
+        </p>
+
+
+        <div class="submit-summary">
+
+            <div>
+                <strong id="submit-answered">
+                    0
+                </strong>
+
+                <span>
+                    Answered
+                </span>
+            </div>
+
+
+            <div>
+                <strong id="submit-unanswered">
+                    30
+                </strong>
+
+                <span>
+                    Unanswered
+                </span>
+            </div>
+
+
+            <div>
+                <strong id="submit-flagged">
+                    0
+                </strong>
+
+                <span>
+                    Flagged
+                </span>
+            </div>
+
+        </div>
+
+
+        <div class="submit-time">
+
+            <span>
+                Time Remaining
+            </span>
+
+            <strong id="submit-time-remaining">
+                30:00
+            </strong>
+
+        </div>
+
+
+        <p
+            id="submit-warning-text"
+            class="submit-warning-text"
+        >
+            You cannot change your answers after submitting.
+        </p>
+
+
+        <div class="submit-modal-actions">
+
+            <button
+                id="return-to-test-button"
+                class="modal-return-button"
+                type="button"
+            >
+                Return
+            </button>
+
+
+            <button
+                id="confirm-submit-button"
+                class="modal-submit-button"
+                type="button"
+            >
+                Submit
+            </button>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+
+<!-- ==================================================
+     RESULTS SCREEN
+     ================================================== -->
+
+<section
+    id="survival-results-screen"
+    class="survival-results-screen hidden"
+>
+
+    <div class="results-decoration">
+        <span></span>
+        <i>✦</i>
+        <span></span>
+    </div>
+
+
+    <header class="results-header">
+
+        <p>
+            SURVIVAL
+        </p>
+
+        <h1>
+            Challenge Complete
+        </h1>
+
+        <span>
+            Trial I
+        </span>
+
+    </header>
+
+
+    <div class="results-score">
+
+        <strong id="result-score">
+            0
+        </strong>
+
+        <span class="score-divider"></span>
+
+        <span id="result-total">
+            30
+        </span>
+
+    </div>
+
+
+    <div
+        id="result-percentage"
+        class="result-percentage"
+    >
+        0%
+    </div>
+
+
+    <div class="result-time">
+
+        <span>
+            Time Used
+        </span>
+
+        <strong id="result-time-used">
+            00:00
+        </strong>
+
+    </div>
+
+
+    <section class="performance-section">
+
+        <div class="results-section-heading">
+
+            <span></span>
+
+            <h2>
+                Performance
+            </h2>
+
+            <span></span>
+
+        </div>
+
+
+        <div
+            id="subject-results"
+            class="subject-results"
+        ></div>
+
+    </section>
+
+
+    <div class="results-actions">
+
+        <button
+            id="review-answers-button"
+            class="results-review-button"
+            type="button"
+        >
+            Review Answers
+        </button>
+
+
+        <button
+            id="results-home-button"
+            class="results-home-button"
+            type="button"
+        >
+            Return Home
+        </button>
+
+    </div>
+
+</section>
+
+        </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script
+        type="module"
+        src="js/survival.js"
+    ></script>
+
+</body>
+</html>

@@ -80,6 +80,9 @@ const friendsButton =
 const friendsNotification =
     document.getElementById("friends-notification");
 
+const survivalButton =
+    document.getElementById("survival-button");
+
 /* ---------- HOMEPAGE FUNCTIONS ---------- */
 
 //Profile Dropdown Visibility
@@ -350,6 +353,17 @@ function updateFriendsNotification(count) {
 
     friendsNotification.classList.remove("hidden");
 }
+
+// Survival Mode
+
+survivalButton.addEventListener(
+    "click",
+    function() {
+
+        window.location.href =
+            "survival.html";
+    }
+);
 
 friendsButton.addEventListener("click", function() {
     window.location.href = "friends.html";
