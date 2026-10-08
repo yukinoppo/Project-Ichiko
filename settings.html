@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Settings | Project Ichiko</title>
+
+    <link rel="stylesheet" href="css/settings.css">
+</head>
+
+<body>
+
+<main class="settings-page">
+
+    <button
+        id="back-home-button"
+        class="back-button"
+        type="button"
+    >
+        ← Home
+    </button>
+
+    <header class="settings-header">
+        <p class="settings-label">PROJECT ICHIKO</p>
+        <h1>Settings</h1>
+    </header>
+
+    <section class="settings-section">
+
+        <h2>Account</h2>
+
+        <div class="setting-row">
+
+            <div class="setting-info">
+                <span class="setting-name">Email</span>
+                <span
+                    id="account-email"
+                    class="setting-value"
+                >
+                    Loading...
+                </span>
+            </div>
+
+        </div>
+
+        <div class="setting-row">
+
+            <div class="setting-info">
+                <span class="setting-name">Password</span>
+                <span class="setting-value">
+                    ••••••••
+                </span>
+            </div>
+
+            <button
+                id="change-password-button"
+                class="setting-button"
+                type="button"
+            >
+                Change Password
+            </button>
+
+        </div>
+
+    </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script type="module" src="js/settings.js"></script>
+
+</body>
+</html>

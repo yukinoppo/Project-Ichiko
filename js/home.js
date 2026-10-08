@@ -83,6 +83,9 @@ const friendsNotification =
 const survivalButton =
     document.getElementById("survival-button");
 
+const rankedButton =
+    document.getElementById("ranked-button");
+
 /* ---------- HOMEPAGE FUNCTIONS ---------- */
 
 //Profile Dropdown Visibility
@@ -368,5 +371,16 @@ survivalButton.addEventListener(
 friendsButton.addEventListener("click", function() {
     window.location.href = "friends.html";
 });
+
+// Ranked Mode
+
+rankedButton.addEventListener(
+    "click",
+    function() {
+
+        window.location.href =
+            "ranked.html";
+    }
+);
 
 checkSession();
